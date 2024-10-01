@@ -25,6 +25,9 @@ git clone https://github.com/SebasDev807/CodeKey-api.git
 npm install
 ```
 4. Ejecuta la aplicación en desarrollo
+```
+yarn start:dev
+```
 
 
 
