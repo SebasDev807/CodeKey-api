@@ -17,7 +17,8 @@ npm install -g @nestjs/cli
 ```
 2. Clonar el repositorio
 ```
-Clonar ---
+git clone https://github.com/SebasDev807/CodeKey-api.git
+
 ```
 3. Instalar dependencias
 ```
