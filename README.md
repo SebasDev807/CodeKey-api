@@ -15,8 +15,15 @@ npm install - g yarn
 ```
 npm install -g @nestjs/cli
 ```
-
-
+2. Clonar el repositorio
+```
+Clonar ---
+```
+3. Instalar dependencias
+```
+npm install
+```
+4. Ejecuta la aplicación en desarrollo
 
 
 
@@ -24,13 +31,3 @@ npm install -g @nestjs/cli
 ## Documentación
 [Documentación oficial de Nest](https://nestjs.com/)
 
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
