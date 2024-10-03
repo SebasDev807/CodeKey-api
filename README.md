@@ -24,7 +24,16 @@ git clone https://github.com/SebasDev807/CodeKey-api.git
 ```
 npm install
 ```
-4. Ejecuta la aplicación en desarrollo
+
+4. Levanta la base de datos
+```
+docker-compose up -d
+```
+5. renombra **.env.template** a **.env**
+6. Llena las variables de entorno de **.env**
+
+
+7. Ejecuta la aplicación en desarrollo
 ```
 yarn start:dev
 ```
