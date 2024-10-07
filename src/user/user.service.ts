@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
@@ -22,9 +22,14 @@ export class UserService {
       await this.userRepository.save(user);
 
       return user;
+
     } catch (error) {
+
+      this.handleDbExceptions(error);
       this.logger.error(error);
+      
     }
+
 
   }
 
@@ -42,5 +47,17 @@ export class UserService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  private handleDbExceptions(error: any) {
+    if (error.code === '23505') {
+      throw new BadRequestException(error.detail);
+    }
+    this.logger.error(error);
+    throw new InternalServerErrorException('Oops! something went broke');
+  }
+
+  private generateToken() {
+
   }
 }
