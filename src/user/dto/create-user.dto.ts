@@ -10,7 +10,7 @@ export class CreateUserDto {
 
     @IsEmail()
     @IsString()
-    @IsUnimayorEmail()
+    // @IsUnimayorEmail() // Desactivado temporalmente
     public email: string;
 
     @IsString()

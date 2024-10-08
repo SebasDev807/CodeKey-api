@@ -4,27 +4,23 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 /* URL: http://localhost:3000/api/v1/users */
-@Controller('users') 
+@Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Post()
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
 
-
-
-
-
-  @Get()
-  findAll() {
-    return this.userService.findAll();
+  @Get('verify/:token')
+  confirmUser(@Param('token') token) {
+    return this.userService.confirmUser(token);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @Get(':term')
+  findOne(@Param('term') term: string) {
+    return this.userService.findOne(term);
   }
 
   @Patch(':id')
