@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MailerModule } from './mailer/mailer.module';
 import { CourseModule } from './course/course.module';
+import { LessonService } from './lesson/lesson.service';
+import { LessonModule } from './lesson/lesson.module';
+import { UnitModule } from './unit/unit.module';
 
 @Module({
   imports: [
@@ -20,13 +23,16 @@ import { CourseModule } from './course/course.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+
+    // Modules
     UserModule,
     MailerModule,
     CourseModule,
-    CourseModule,
+    LessonModule,
+    UnitModule,
   ],
 
   controllers: [],
-  providers: [],
+  providers: [LessonService],
 })
 export class AppModule {}
