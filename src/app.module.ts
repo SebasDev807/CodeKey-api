@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MailerModule } from './mailer/mailer.module';
+import { CourseModule } from './course/course.module';
 
 @Module({
   imports: [
@@ -17,11 +18,15 @@ import { MailerModule } from './mailer/mailer.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
-      synchronize: true
-    }), UserModule, MailerModule
+      synchronize: true,
+    }),
+    UserModule,
+    MailerModule,
+    CourseModule,
+    CourseModule,
   ],
-  
+
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
