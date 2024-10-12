@@ -69,28 +69,16 @@ yarn install
 
 #### 1. Crear un nuevo usuario
 
-<<<<<<< HEAD
-### 1. Crear un nuevo usuario
-**Endpoint:**` POST - http://localhost:3000/api/v1/auth/register`  
-=======
 **Endpoint:**` POST - http//:localhost:3000/api/v1/users`  
->>>>>>> 0361a7876bfc95128dcf37152a79ef9cdb8d0770
 **Descripción:** Crea un nuevo usuario en el sistema.  
 **Body:**
 
 ```json
 {
-<<<<<<< HEAD
-  "name":"string", 
-  "email":"string@unimayor.edu.co", 
-  "password":"string", 
-  "repeatedPassword":"string debe coincidir con password"
-=======
   "name": "string", //Minimo 5 cáracteres - Requerido
   "password": "string", //Minimo 5 caracteres - Requerido
   "repeatedPassword": "string", //Debe ser igual al valor de password
   "email": "string@unimayor.edu.co" //Debe terminar en @unimayor.edu.co
->>>>>>> 0361a7876bfc95128dcf37152a79ef9cdb8d0770
 }
 ```
 
