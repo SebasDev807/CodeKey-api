@@ -41,15 +41,15 @@ yarn start:dev
 ## API Endopoints
 
 ### 1. Crear un nuevo usuario
-**Endpoint:**` POST - http//:localhost:3000/api/v1/users`  
+**Endpoint:**` POST - http://localhost:3000/api/v1/auth/register`  
 **Descripción:** Crea un nuevo usuario en el sistema.  
 **Body:**
 ```json  
 {
-  "name":"string", //Minimo 5 cáracteres - Requerido
-  "password":"string", //Minimo 5 caracteres - Requerido
-  "repeatedPassword":"string", //Debe ser igual al valor de password
-  "email":"string@unimayor.edu.co" //Debe terminar en @unimayor.edu.co
+  "name":"string", 
+  "email":"string@unimayor.edu.co", 
+  "password":"string", 
+  "repeatedPassword":"string debe coincidir con password"
 }
 ```
 

@@ -50,7 +50,7 @@ export class MailerService {
                     <div style="padding: 20px;">
                         <h2>Confirma tu Cuenta</h2>
                         <p>Para completar tu registro, por favor confirma tu cuenta haciendo clic en el botón de abajo:</p>
-                        <a href="http://localhost:3000/api/v1/users/verify/${token}" style="display: inline-block; padding: 15px 25px; margin: 20px 0; color: #ffffff; background-color: #8a6bb1; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;">Confirmar Cuenta</a>
+                        <a href="http://localhost:3000/api/v1/auth/verify/${token}" style="display: inline-block; padding: 15px 25px; margin: 20px 0; color: #ffffff; background-color: #8a6bb1; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;">Confirmar Cuenta</a>
                         <p>Si no solicitaste esta cuenta, puedes ignorar este correo.</p>
                     </div>
                     <div style="padding: 10px; text-align: center; font-size: 14px; color: #888888;">
