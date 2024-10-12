@@ -69,7 +69,7 @@ yarn install
 
 #### 1. Crear un nuevo usuario
 
-**Endpoint:**` POST - http//:localhost:3000/api/v1/users`  
+**Endpoint:**` POST - http://localhost:3000/api/v1/auth/register`  
 **Descripción:** Crea un nuevo usuario en el sistema.  
 **Body:**
 
