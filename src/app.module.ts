@@ -5,6 +5,7 @@ import { MailerModule } from './mailer/mailer.module';
 import { CourseModule } from './course/course.module';
 import { LessonModule } from './lesson/lesson.module';
 import { UnitModule } from './unit/unit.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UnitModule } from './unit/unit.module';
       autoLoadEntities: true,
       synchronize: true
     }), 
+    AuthModule,
     MailerModule,
     CourseModule,
     LessonModule,

@@ -41,11 +41,14 @@ export class MailerService {
     }
 
     private confirmAccountHTML(name: string, token: string) {
+
+        const firstName = name.split(' ')[0];
+        
         return `
             <div style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0;">
                 <div style="width: 100%; max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
                     <div style="background-color: #5c4d8e; color: #ffffff; padding: 20px; text-align: center;">
-                        <h1>Hola ${name} ¡Bienvenido a CodeKey!</h1>
+                        <h1>Hola ${firstName} ¡Bienvenido a CodeKey!</h1>
                     </div>
                     <div style="padding: 20px;">
                         <h2>Confirma tu Cuenta</h2>
