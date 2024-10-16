@@ -4,28 +4,33 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
+  OneToMany, // Importar para la relación inversa
   JoinColumn,
 } from 'typeorm';
-import { Course } from '../../course/entities/course.entity'; // Import Course entity for relationship
+import { Course } from '../../course/entities/course.entity';
+import { Lesson } from 'src/lesson/entities/lesson.entity';
 
 @Entity({ name: 'unit' })
 export class Unit {
-  @PrimaryGeneratedColumn('uuid') // Use UUID for unique ID
-  public id: string;
+  @PrimaryGeneratedColumn('increment')
+  public id: number;
 
   @Column('text', { nullable: false })
-  @MaxLength(100) // Maximum length for the title
+  @MaxLength(100)
   public title: string;
 
   @Column('text', { nullable: false })
-  @MaxLength(500) // Set a reasonable limit for description (can adjust)
+  @MaxLength(500)
   public description: string;
 
   @ManyToOne(() => Course, (course) => course.units, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'course_id' }) // course_id as the foreign key in units table
-  public course: Course; // Relation to the Course entity
+  @JoinColumn({ name: 'course_id' })
+  public course: Course;
+
+  @OneToMany(() => Lesson, (lesson) => lesson.unit) // Agregar relación inversa
+  public lessons: Lesson[]; // Relación a Lección
 
   @Column('int', { unique: true, nullable: false })
-  @Max(9999) // Limit order value to prevent overflow
+  @Max(9999)
   public order: number;
 }
