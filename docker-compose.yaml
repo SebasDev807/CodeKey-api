@@ -1,4 +1,4 @@
-# version: '3'
+version: '3'
 
 services:
   db:
@@ -12,3 +12,9 @@ services:
     container_name: codekeydb
     volumes:
       - ./postgres:/var/lib/postgresql/data
+
+  plantuml:
+    image: plantuml/plantuml-server:jetty
+    restart: always
+    ports:
+      - '8081:8080'
