@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 2525,
+  "username": "postgres",
+  "password": 123,
+  "database": "CODEKEYDB",
+  "synchronize": true,
+  "entities": ["dist/**/*.entity{.ts,.js}"]
+}
