@@ -27,8 +27,8 @@ export class Unit {
   @JoinColumn({ name: 'course_id' })
   public course: Course;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.unit) // Agregar relación inversa
-  public lessons: Lesson[]; // Relación a Lección
+  @OneToMany(() => Lesson, (lesson) => lesson.unit)
+  public lessons: Lesson[];
 
   @Column('int', { unique: true, nullable: false })
   @Max(9999)

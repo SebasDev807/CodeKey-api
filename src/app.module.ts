@@ -6,6 +6,9 @@ import { CourseModule } from './course/course.module';
 import { LessonModule } from './lesson/lesson.module';
 import { UnitModule } from './unit/unit.module';
 import { AuthModule } from './auth/auth.module';
+import { ChallengeModule } from './challenge/challenge.module';
+import { OptionChallengeModule } from './option-challenge/option-challenge.module';
+import { PregressChallengeModule } from './pregress-challenge/pregress-challenge.module';
 
 @Module({
   imports: [
@@ -26,7 +29,10 @@ import { AuthModule } from './auth/auth.module';
     MailerModule,
     CourseModule,
     LessonModule,
-    UnitModule
+    UnitModule,
+    ChallengeModule,
+    OptionChallengeModule,
+    PregressChallengeModule
 
   ],
 
