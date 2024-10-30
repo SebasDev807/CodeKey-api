@@ -1,13 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
+  const logger = new Logger('Main');
+
   const env = app.get(ConfigService);
-  const corsOrigin = env.get<string>('CLIENT_URL'); //asi accedemos a las variables de entorno en nest
+
+  //asi accedemos a las variables de entorno en nest
+  const port = env.get<number>('PORT');
+  const corsOrigin = env.get<string>('CLIENT_URL'); 
 
   app.setGlobalPrefix('api/v1');
   app.enableCors({
@@ -23,6 +28,7 @@ async function bootstrap() {
 
   );
 
-  await app.listen(3000);
+  await app.listen(port);
+  logger.log(`Server is running on port ${port}`);
 }
 bootstrap();

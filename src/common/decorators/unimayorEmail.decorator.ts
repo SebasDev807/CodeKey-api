@@ -12,7 +12,7 @@ export function IsUnimayorEmail(validationOptions?: ValidationOptions) {
           return typeof value === 'string' && value.endsWith('@unimayor.edu.co');
         },
         defaultMessage(args: ValidationArguments) {
-          return 'You must be a Unimayor student';
+          return 'Debes ser estudiante de Unimayor';
         },
       },
     });

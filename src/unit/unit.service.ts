@@ -66,7 +66,7 @@ export class UnitService {
 
       if (existUnit)
         throw new HttpException(
-          'Uniti title already exist.',
+          'Unit title already exist.',
           HttpStatus.BAD_REQUEST,
         );
 

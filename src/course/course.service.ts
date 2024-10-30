@@ -4,17 +4,16 @@ import {
   HttpException,
   HttpStatus,
   InternalServerErrorException,
+  BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-
 import { Repository } from 'typeorm';
-
 import { Course } from './entities/course.entity';
-
 import { InjectRepository } from '@nestjs/typeorm';
-import { log } from 'console';
+
 
 @Injectable()
 export class CourseService {
@@ -32,12 +31,18 @@ export class CourseService {
         where: { title: createCourseDto.title },
       });
 
-      if (existingCourse) {
-        throw new HttpException(
-          'Course with this title already exists',
-          HttpStatus.BAD_REQUEST,
-        );
+
+      const { title } = createCourseDto;
+
+      if(existingCourse){
+        throw new BadRequestException(`Course with title '${title}'`)
       }
+      // if (existingCourse) {
+      //   throw new HttpException(
+      //     'Course with this title already exists',
+      //     HttpStatus.BAD_REQUEST,
+      //   );
+      // }
 
       // Crear y guardar el curso
       const course = this.courseRepository.create(createCourseDto);
@@ -57,11 +62,13 @@ export class CourseService {
         throw error;
       }
 
+
       // Si es otro tipo de error, lanzamos un error 500 (Internal Server Error)
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new InternalServerErrorException('Something went broke');
+      // throw new HttpException(
+      //   'Internal server error',
+      //   HttpStatus.INTERNAL_SERVER_ERROR,
+      // );
     }
   }
 
@@ -70,22 +77,19 @@ export class CourseService {
       const allCourses = await this.courseRepository.find();
 
       if (allCourses.length === 0) {
-        throw new HttpException('No courses found', HttpStatus.NOT_FOUND);
+        throw new NotFoundException('No courses found');
       }
 
       // Retornar estado 200 (OK) y todos los cursos
       return {
-        statusCode: HttpStatus.OK,
+        // statusCode: HttpStatus.OK,
         message: 'Courses found',
         allCourses,
       };
     } catch (error) {
       this.logger.error(error.message, error.stack);
       // Si es un HttpException, lo re-lanzamos tal como está
-      throw new HttpException(
-        'Internal Server Error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new InternalServerErrorException('Something went broke.')
     }
   }
 

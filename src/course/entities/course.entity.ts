@@ -9,7 +9,9 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'courses' })
+
 export class Course {
+
   @PrimaryGeneratedColumn('increment') // Auto-increment primary key
   public id: number;
 
@@ -19,7 +21,11 @@ export class Course {
   @Column('text', { name: 'image_src', nullable: false })
   public imageSrc: string;
 
-  @OneToMany(() => Unit, (unit) => unit.course)
+  @OneToMany(
+    () => Unit,
+    unit => unit.course,
+    { onDelete: 'CASCADE' }
+  )
   public units: Unit[]; // A course has many units
 
   @CreateDateColumn({ name: 'created_at' }) // Automatically stores creation timestamp

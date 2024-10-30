@@ -11,7 +11,6 @@ import { JwtPayload } from "../interfaces/jwt-payload.interface";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 
-
     constructor(
         @InjectRepository(User)
         private readonly userRepository: Repository<User>,
@@ -20,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super({
             secretOrKey: configService.get<string>('JWT_SECRET'),
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-        })
+        });
     }
 
 
@@ -34,7 +33,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             throw new UnauthorizedException('Invalid token');
         }
 
-        if (user.confirmed) {
+        if (!user.confirmed) {
             throw new UnauthorizedException('Unconfirmed user');
         }
 

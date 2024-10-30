@@ -1,36 +1,35 @@
-import { Max, MaxLength } from 'class-validator';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  OneToMany, // Importar para la relación inversa
-  JoinColumn,
-} from 'typeorm';
-import { Course } from '../../course/entities/course.entity';
+import { Course } from 'src/course/entities/course.entity';
 import { Lesson } from 'src/lesson/entities/lesson.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'unit' })
+
 export class Unit {
-  @PrimaryGeneratedColumn('increment')
-  public id: number;
+
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
 
   @Column('text', { nullable: false })
-  @MaxLength(100)
   public title: string;
 
   @Column('text', { nullable: false })
-  @MaxLength(500)
   public description: string;
 
-  @ManyToOne(() => Course, (course) => course.units, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'course_id' })
+  @ManyToOne(
+    () => Course,
+    course => course.units,
+    { onDelete: 'CASCADE' }
+  )
   public course: Course;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.unit)
-  public lessons: Lesson[];
+  @OneToMany(
+    () => Lesson,
+    lesson => lesson.unit,
+    { onDelete: 'CASCADE' }
+  )
+  public lessons: Lesson[]
 
   @Column('int', { unique: true, nullable: false })
-  @Max(9999)
   public order: number;
 }
+

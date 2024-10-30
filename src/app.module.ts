@@ -7,8 +7,11 @@ import { LessonModule } from './lesson/lesson.module';
 import { UnitModule } from './unit/unit.module';
 import { AuthModule } from './auth/auth.module';
 import { ChallengeModule } from './challenge/challenge.module';
-import { OptionChallengeModule } from './option-challenge/option-challenge.module';
-import { PregressChallengeModule } from './pregress-challenge/pregress-challenge.module';
+import { Lesson } from './lesson/entities/lesson.entity';
+import { Unit } from './unit/entities/unit.entity';
+import { Challenge } from './challenge/entities/challenge.entity';
+import { ChallengeOptions } from './challenge/entities/challenge-option.entity';
+import { ChallengeProgress } from './challenge/entities/challenge-progress.entity';
 
 @Module({
   imports: [
@@ -23,20 +26,25 @@ import { PregressChallengeModule } from './pregress-challenge/pregress-challenge
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
-      synchronize: true
-    }), 
+      synchronize: true,
+      entities: [
+        ChallengeProgress,
+        ChallengeOptions,
+        Challenge,
+        Lesson,
+        Unit,
+      ],
+    }),
     AuthModule,
     MailerModule,
     CourseModule,
     LessonModule,
     UnitModule,
     ChallengeModule,
-    OptionChallengeModule,
-    PregressChallengeModule
-
+    // OptionChallengeModule,
   ],
 
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

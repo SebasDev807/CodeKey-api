@@ -25,24 +25,36 @@ export class AuthService {
 
   async create(createUserDto: CreateUserDto) {
 
-    try {
+    const { email } = createUserDto;
 
-      const user = await this.userRepository.create(createUserDto);
-      user.token = this.generateToken();
-      const { email, name, token } = user;
+    const existingUser = await this.userRepository.findOne({
+      where: { email },
+      select: { confirmed: true, id: true }
+    });
 
-      await this.userRepository.save(user);
+    if (existingUser) {
+      if (existingUser.confirmed) {
+        throw new BadRequestException('This account already exists');
+      }
 
-      this.mailService.sendEmail(email, name, token, 'Verificación de cuenta', 'Verifica tu cuenta');
-
-      delete user.password;
-
-      return user;
-
-    } catch (error) {
-      this.logger.error(error);
-      this.handleErrors(error);
+      if (!existingUser.confirmed) {
+        await this.userRepository.delete({ id: existingUser.id });
+      }
     }
+
+    const user = await this.userRepository.create(createUserDto);
+    user.token = this.generateToken();
+    const { name, token } = user;
+
+    await this.userRepository.save(user);
+
+    this.mailService.sendEmail(email, name, token, 'Verificación de cuenta', 'Verifica tu cuenta');
+
+    delete user.password;
+
+    return user;
+
+
   }
 
 
@@ -51,19 +63,19 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true }
+      select: { email: true, password: true, confirmed: true }
     });
 
     if (!user) {
-      throw new UnauthorizedException(`Not account related with email ${email}`);
+      throw new UnauthorizedException(`No existe una cuenta con el email ${email}`);
     }
 
-    if (user.confirmed) {
-      throw new UnauthorizedException('Please, confirm your account');
+    if (!user.confirmed) {
+      throw new UnauthorizedException('Por favor confirma tu cuenta');
     }
 
     if (!bcrypt.compareSync(password, user.password)) {
-      throw new UnauthorizedException('Credentials are not valid');
+      throw new UnauthorizedException('Credenciales invalidas');
     }
 
     delete user.password;
@@ -80,14 +92,14 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({ token });
 
     if (!user) {
-      throw new NotFoundException('Invalid token or has expired');
+      throw new NotFoundException('El token no existe o ha expirado');
     }
 
     user.confirmed = true;
     user.token = null;
     await this.userRepository.save(user);
 
-    return { message: 'Account verified!' };
+    return { message: 'Cuenta verificada!' };
 
 
   }
@@ -95,14 +107,11 @@ export class AuthService {
 
   private getJwtToken(payload: JwtPayload) {
     return this.jwtService.sign(payload);
-
   }
-
 
   private generateToken() {
     return randomBytes(10).toString('hex');
   }
-
 
   private handleErrors(error: any): never {
     if (error.code === '23505') {
