@@ -63,7 +63,7 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, confirmed: true }
+      select: { email: true, password: true, confirmed: true, id:true }
     });
 
     if (!user) {
@@ -80,8 +80,10 @@ export class AuthService {
 
     delete user.password;
 
+    console.log(user);
+    
     return {
-      user,
+      ...user,
       token: this.getJwtToken({ id: user.id })
     };
   }

@@ -1,10 +1,12 @@
-import { IsString, MaxLength } from 'class-validator';
+import { IsString, IsUrl, MaxLength } from 'class-validator';
 
 export class CreateCourseDto {
-  @MaxLength(20)
-  @IsString()
-  public title: string;
+  @MaxLength(50)
+  title: string;
 
-  @IsString()
-  public imageSrc: string;
+  @MaxLength(500)
+  description:string;
+
+  @IsUrl()
+  imageSrc: string;
 }

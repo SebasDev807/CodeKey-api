@@ -1,36 +1,32 @@
 import { Unit } from 'src/unit/entities/unit.entity';
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'courses' })
 
 export class Course {
 
-  @PrimaryGeneratedColumn('increment') // Auto-increment primary key
-  public id: number;
+  @PrimaryGeneratedColumn('increment') 
+  id: number;
 
   @Column('text', { nullable: false })
-  public title: string;
+  title: string;
+
+  @Column('text', { nullable: false })
+  description:string;
 
   @Column('text', { name: 'image_src', nullable: false })
-  public imageSrc: string;
+  imageSrc: string;
 
   @OneToMany(
     () => Unit,
     unit => unit.course,
     { onDelete: 'CASCADE' }
   )
-  public units: Unit[]; // A course has many units
+  units: Unit[]; 
 
-  @CreateDateColumn({ name: 'created_at' }) // Automatically stores creation timestamp
-  public createdAt: Date;
+  @CreateDateColumn({ name: 'created_at' }) 
+  createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' }) // Updates timestamp on entity changes
-  public updatedAt: Date;
+  @UpdateDateColumn({ name: 'updated_at' }) 
+  updatedAt: Date;
 }

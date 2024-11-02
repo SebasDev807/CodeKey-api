@@ -1,16 +1,8 @@
-import {
-  Injectable,
-  Logger,
-  HttpException,
-  HttpStatus,
-  InternalServerErrorException,
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, HttpException, HttpStatus, InternalServerErrorException, BadRequestException, NotFoundException, } from '@nestjs/common';
 
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Course } from './entities/course.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -22,9 +14,12 @@ export class CourseService {
   constructor(
     @InjectRepository(Course)
     private readonly courseRepository: Repository<Course>,
-  ) {}
 
-  async create(createCourseDto: CreateCourseDto) {
+    private readonly datasource: DataSource
+  ) { }
+
+
+  async createCourse(createCourseDto: CreateCourseDto) {
     try {
       // Verificar si ya existe un curso con el mismo título
       const existingCourse = await this.courseRepository.findOne({
@@ -34,26 +29,16 @@ export class CourseService {
 
       const { title } = createCourseDto;
 
-      if(existingCourse){
-        throw new BadRequestException(`Course with title '${title}'`)
+      if (existingCourse) {
+        throw new BadRequestException(`Course with title '${title}' already exists`)
       }
-      // if (existingCourse) {
-      //   throw new HttpException(
-      //     'Course with this title already exists',
-      //     HttpStatus.BAD_REQUEST,
-      //   );
-      // }
 
       // Crear y guardar el curso
       const course = this.courseRepository.create(createCourseDto);
       await this.courseRepository.save(course);
 
-      // Retornar estado 201 (Created) y el curso creado
-      return {
-        statusCode: HttpStatus.CREATED,
-        message: 'Course created successfully',
-        course,
-      };
+      return course;
+
     } catch (error) {
       this.logger.error(error.message, error.stack);
 
@@ -62,15 +47,11 @@ export class CourseService {
         throw error;
       }
 
-
       // Si es otro tipo de error, lanzamos un error 500 (Internal Server Error)
       throw new InternalServerErrorException('Something went broke');
-      // throw new HttpException(
-      //   'Internal server error',
-      //   HttpStatus.INTERNAL_SERVER_ERROR,
-      // );
     }
   }
+
 
   async findAll() {
     try {
@@ -80,40 +61,78 @@ export class CourseService {
         throw new NotFoundException('No courses found');
       }
 
-      // Retornar estado 200 (OK) y todos los cursos
-      return {
-        // statusCode: HttpStatus.OK,
-        message: 'Courses found',
-        allCourses,
-      };
+      return allCourses
+
     } catch (error) {
       this.logger.error(error.message, error.stack);
-      // Si es un HttpException, lo re-lanzamos tal como está
+
       throw new InternalServerErrorException('Something went broke.')
     }
   }
 
-  async findOne(id: number) {
+
+  async findOne(term: string) {
+
+    let course: Course;
+
+
+    const queryBuilder = this.courseRepository.createQueryBuilder('course');
+    course = await queryBuilder
+      .leftJoinAndSelect('course.units', 'units')
+      .where('course.title ILIKE :title', { title: `%${term}%` })
+      .orWhere('course.id =:id', { id: !isNaN(Number(term)) ? +term : null })
+      .getOne();
+
+    if (!course) {
+      throw new NotFoundException(`Course with term '${term}' not found.`)
+    }
+
+    console.log(course);
+    return course;
+  }
+
+  async update(id: number, updateCourseDto: UpdateCourseDto) {
+    const course = await this.courseRepository.preload({
+      id,
+      ...updateCourseDto
+    });
+
+    if (!course) {
+      throw new NotFoundException(`Course with id ${id} not found`);
+    }
+
     try {
-      const course = await this.courseRepository.findOneBy({ id });
-
-      if (!course) {
-        throw new InternalServerErrorException(
-          `Course with ID ${id} not found`,
-        );
-      }
-
-      return course;
+      await this.courseRepository.save(course);
     } catch (error) {
-      this.logger.error(error.message, error.stack);
+      this.logger.error(error)
+      throw new InternalServerErrorException(error);
     }
   }
 
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
+  async remove(id: number) {
+    try {
+      
+      const course = await this.findOne(id.toString());
+      
+      await this.courseRepository.remove(course);
+    } catch (error) {
+
+      this.logger.error(error);
+      
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+  async deleteAllCourses(){
+    const query = this.courseRepository.createQueryBuilder('course');
+    try {
+      return await query
+        .delete()
+        .where({})
+        .execute();
+    } catch (error) {
+      this.logger.error(error)
+      throw new InternalServerErrorException(error);
+    }
   }
 }

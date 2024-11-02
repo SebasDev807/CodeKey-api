@@ -7,11 +7,7 @@ import { LessonModule } from './lesson/lesson.module';
 import { UnitModule } from './unit/unit.module';
 import { AuthModule } from './auth/auth.module';
 import { ChallengeModule } from './challenge/challenge.module';
-import { Lesson } from './lesson/entities/lesson.entity';
-import { Unit } from './unit/entities/unit.entity';
-import { Challenge } from './challenge/entities/challenge.entity';
-import { ChallengeOptions } from './challenge/entities/challenge-option.entity';
-import { ChallengeProgress } from './challenge/entities/challenge-progress.entity';
+
 
 @Module({
   imports: [
@@ -27,13 +23,6 @@ import { ChallengeProgress } from './challenge/entities/challenge-progress.entit
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [
-        ChallengeProgress,
-        ChallengeOptions,
-        Challenge,
-        Lesson,
-        Unit,
-      ],
     }),
     AuthModule,
     MailerModule,
