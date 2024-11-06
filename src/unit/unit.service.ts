@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, BadRequestException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 
 import { CreateUnitDto } from './dto/create-unit.dto';
 import { UpdateUnitDto } from './dto/update-unit.dto';
@@ -10,92 +10,103 @@ import { Unit } from './entities/unit.entity';
 
 @Injectable()
 export class UnitService {
-  private readonly logger: Logger = new Logger();
+  private readonly logger: Logger = new Logger('unit');
 
   constructor(
     @InjectRepository(Unit)
     private readonly unitRepository: Repository<Unit>,
-  ) {}
+  ) { }
 
-  /*
-  try {
-      // Verificar si ya existe un curso con el mismo título
-      const existingCourse = await this.courseRepository.findOne({
-        where: { title: createCourseDto.title },
-      });
-
-      if (existingCourse) {
-        throw new HttpException(
-          'Course with this title already exists',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      // Crear y guardar el curso
-      const course = this.courseRepository.create(createCourseDto);
-      await this.courseRepository.save(course);
-
-      // Retornar estado 201 (Created) y el curso creado
-      return {
-        statusCode: HttpStatus.CREATED,
-        message: 'Course created successfully',
-        course,
-      };
-    } catch (error) {
-      this.logger.error(error.message, error.stack);
-
-      // Si es un HttpException, lo re-lanzamos tal como está
-      if (error instanceof HttpException) {
-        throw error;
-      }
-
-      // Si es otro tipo de error, lanzamos un error 500 (Internal Server Error)
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-    */
 
   async create(createUnitDto: CreateUnitDto) {
     try {
-      // Verificar si ya existe un curso con el mismo título
+
+      const { title } = createUnitDto;
+
       const existUnit = await this.unitRepository.findOne({
-        where: { title: createUnitDto.title },
+        where: { title },
       });
 
-      if (existUnit)
-        throw new HttpException(
-          'Unit title already exist.',
-          HttpStatus.BAD_REQUEST,
-        );
+      if (existUnit) {
+        throw new BadRequestException(`Unidad con el titulo ${title} ya existe.`)
+      }
 
-      // Crear y guardar el curso
-      const unity = this.unitRepository.create(createUnitDto);
-      await this.unitRepository.save(unity);
+      const unit = this.unitRepository.create(createUnitDto);
+      await this.unitRepository.save(unit);
 
-      // Retornar estado 201 (Created) y el curso creado
-      return {
-        statusCode: HttpStatus.CREATED,
-        message: 'Course created successfully',
-        unity,
-      };
-    } catch (error) {}
+      return unit;
+
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all unit`;
+
+  async findOne(term: string, course: number) {
+    let unit: Unit;
+
+    const queryBuilder = this.unitRepository.createQueryBuilder('unit');
+
+    const order = !isNaN(Number(term)) ? Number(term) : null;
+
+    unit = await queryBuilder
+      .leftJoinAndSelect('unit.course', 'course')
+      .where('(unit.title ILIKE :title OR unit.order = :order)', {
+        title: `%${term}%`,
+        order,
+      })
+      .andWhere('unit."courseId" = :course', {
+        course,
+      })
+      .getOne();
+
+    // c.--km.
+
+    if (!unit) {
+      throw new NotFoundException(`Unidad con el termino ${term} no existe.`);
+    }
+
+    return unit;
+
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} unit`;
+  async update(id: string, updateUnitDto: UpdateUnitDto) {
+  
+    const unit = await this.unitRepository.preload({
+      id,
+      ...updateUnitDto
+    });
+
+    if (!unit) {
+      throw new BadRequestException(`Unidad con id ${id} not existe.`)
+    }
+
+    try {
+
+      await this.unitRepository.save(unit);
+
+    } catch (error) {
+
+      this.logger.error(error);
+
+      throw new InternalServerErrorException(error);
+    }
+
   }
 
-  update(id: number, updateUnitDto: UpdateUnitDto) {
-    return `This action updates a #${id} unit`;
+
+  async remove(id: string) {
+
+    const unit = await this.unitRepository.findOneBy({ id });
+ 
+    if (!unit) {
+      throw new NotFoundException(`Unidad con id ${id} no existe`);
+    }
+
+    await this.unitRepository.remove(unit);
+
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} unit`;
-  }
 }
+

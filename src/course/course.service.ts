@@ -30,10 +30,9 @@ export class CourseService {
       const { title } = createCourseDto;
 
       if (existingCourse) {
-        throw new BadRequestException(`Course with title '${title}' already exists`)
+        throw new BadRequestException(`Curso con titulo '${title}' ya existe`)
       }
 
-      // Crear y guardar el curso
       const course = this.courseRepository.create(createCourseDto);
       await this.courseRepository.save(course);
 
@@ -47,8 +46,7 @@ export class CourseService {
         throw error;
       }
 
-      // Si es otro tipo de error, lanzamos un error 500 (Internal Server Error)
-      throw new InternalServerErrorException('Something went broke');
+      throw new InternalServerErrorException('Algo salio mal');
     }
   }
 
@@ -58,15 +56,15 @@ export class CourseService {
       const allCourses = await this.courseRepository.find();
 
       if (allCourses.length === 0) {
-        throw new NotFoundException('No courses found');
+        throw new NotFoundException('No se encontraron cursos');
       }
 
-      return allCourses
+      return allCourses;
 
     } catch (error) {
       this.logger.error(error.message, error.stack);
 
-      throw new InternalServerErrorException('Something went broke.')
+      throw new InternalServerErrorException('Algo salio mal.')
     }
   }
 
@@ -84,7 +82,7 @@ export class CourseService {
       .getOne();
 
     if (!course) {
-      throw new NotFoundException(`Course with term '${term}' not found.`)
+      throw new NotFoundException(`Curso con termino '${term}' no existe.`)
     }
 
     console.log(course);
@@ -98,7 +96,7 @@ export class CourseService {
     });
 
     if (!course) {
-      throw new NotFoundException(`Course with id ${id} not found`);
+      throw new NotFoundException(`Curso con id ${id} no existe`);
     }
 
     try {

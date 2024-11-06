@@ -9,20 +9,21 @@ import { ChallengeOptions } from './challenge-option.entity';
 export class Challenge {
 
   @PrimaryGeneratedColumn('increment')
-  public id: string;
+  id: string;
 
   @Column({
     type: 'enum',
     enum: ChallengeType,
     default: ChallengeType.SELECT,
   })
-  public challengeType: ChallengeType;
+  challengeType: ChallengeType;
 
   @Column('text', { nullable: false })
-  public question: string;
+  question: string;
+
 
   @Column('int', { unique: true, nullable: false })
-  public order: number;
+  order: number;
 
 
   @ManyToOne(
@@ -30,14 +31,16 @@ export class Challenge {
     lesson => lesson.challenges,
     { onDelete: 'CASCADE' }
   )
-  public lesson: Lesson;
+  lesson: Lesson;
 
   @OneToMany(
     () => ChallengeOptions,
     ChallengeOptions => ChallengeOptions.challenge,
     { cascade: true, },
   )
-  public challengeOptions: ChallengeOptions[];
+  challengeOptions: ChallengeOptions[];
+
+
 }
 
 // @ManyToOne(() => Lesson, (lesson) => lesson.challenge, {

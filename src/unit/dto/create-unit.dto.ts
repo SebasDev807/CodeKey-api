@@ -1,15 +1,19 @@
-import { IsInt, IsString, MinLength } from 'class-validator';
+import { IsInt, IsString, MaxLength, MinLength } from 'class-validator';
+import { Course } from 'src/course/entities/course.entity';
 
 export class CreateUnitDto {
-  @IsString()
+
   @MinLength(5)
-  public title: string;
+  @MaxLength(50)
+  title: string;
 
-  @IsString()
   @MinLength(15)
-  public description: string;
+  @MaxLength(500)
+  description: string;
 
-  // TODO: orden integer
   @IsInt()
-  public order: number;
+  order: number;
+ 
+  @IsInt()
+  course: Course;
 }

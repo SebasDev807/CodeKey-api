@@ -11,6 +11,8 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 
+
+
 @Injectable()
 export class AuthService {
 
@@ -120,7 +122,7 @@ export class AuthService {
       throw new BadRequestException(error.detail);
     }
     this.logger.error(error);
-    throw new InternalServerErrorException('Please check server logs');
+    throw new InternalServerErrorException('Verifica los logs del servidor');
   }
 
 

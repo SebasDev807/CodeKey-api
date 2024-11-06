@@ -4,10 +4,9 @@ import { UpdateLessonDto } from './dto/update-lesson.dto';
 
 @Injectable()
 export class LessonService {
+  
   create(createLessonDto: CreateLessonDto) {
-    try {
-      return 'This action adds a new lesson';
-    } catch (error) {}
+    return 'This action adds a new lesson';
   }
 
   findAll() {
@@ -25,4 +24,5 @@ export class LessonService {
   remove(id: number) {
     return `This action removes a #${id} lesson`;
   }
+  
 }
