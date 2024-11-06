@@ -66,31 +66,9 @@ yarn install
 ```
 
 ### API Endpoints
-
-#### 1. Crear un nuevo usuario
-
-**Endpoint:**` POST - http://localhost:3000/api/v1/auth/register`  
-**Descripción:** Crea un nuevo usuario en el sistema.  
-**Body:**
-
-```json
-{
-  "name": "string", 
-  "password": "string", 
-  "repeatedPassword": "string", 
-  "email": "emailg@unimayor.edu.co" 
-}
+Accede al siguiente url para visualizar la documentación
 ```
-
-**Endpoint:**` POST - http://localhost:3000/api/v1/auth/login`  
-**Descripción:** Realiza un Login al sistema 
-**Body:**
-
-```json
-{
-  "email":"email@unimayor.edu.co",
-  "password":"debe ser correcta"
-}
+http://localhost:3000/api
 ```
 
 ## Documentación de Nest
