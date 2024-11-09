@@ -4,6 +4,7 @@ import { CreateUnitDto } from './dto/create-unit.dto';
 import { UpdateUnitDto } from './dto/update-unit.dto';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles.enum';
 import { Auth } from '../auth/decorators/role-protected/auth.decorator';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('unit')
 export class UnitController {
@@ -13,6 +14,13 @@ export class UnitController {
   @Auth(ValidRoles.ADMIN)
   create(@Body() createUnitDto: CreateUnitDto) {
     return this.unitService.create(createUnitDto);
+  }
+
+  @Get('findMany/:courseId')
+  findAll(
+    @Param('courseId') course: number) {
+    return this.unitService.findAll(course,);
+
   }
 
   @Get(':term')
@@ -31,5 +39,5 @@ export class UnitController {
   remove(@Param('id') id: number) {
     return this.unitService.remove(id);
   }
-  
+
 }

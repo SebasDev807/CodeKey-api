@@ -66,6 +66,8 @@ export class LessonService {
     }
   }
 
+  
+
   async deleteAllLessons() {
     const queryBuilder = this.lessonRepository.createQueryBuilder();
       queryBuilder.delete()

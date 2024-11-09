@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Unit } from './entities/unit.entity';
+import { PaginationDto } from '../common/dtos/pagination.dto';
 
 @Injectable()
 export class UnitService {
@@ -43,6 +44,26 @@ export class UnitService {
   }
 
 
+  async findAll(course: number) {
+
+  
+    console.log(course);
+
+    const queryBuilder = await this.unitRepository.createQueryBuilder('unit')
+   
+    const units = await queryBuilder
+    .leftJoinAndSelect('unit.lessons', 'lesson')
+      .where('unit.courseId =:course', {
+        course
+      })
+      .getMany();
+
+    console.log(units);
+    return units
+  }
+
+
+
   async findOne(term: string, course: number) {
     let unit: Unit;
 
@@ -70,7 +91,7 @@ export class UnitService {
   }
 
   async update(id: number, updateUnitDto: UpdateUnitDto) {
-  
+
     const unit = await this.unitRepository.preload({
       id,
       ...updateUnitDto
@@ -97,7 +118,7 @@ export class UnitService {
   async remove(id: number) {
 
     const unit = await this.unitRepository.findOneBy({ id });
- 
+
     if (!unit) {
       throw new NotFoundException(`Unidad con id ${id} no existe`);
     }
@@ -106,7 +127,7 @@ export class UnitService {
 
   }
 
-  async deleteAllUnits(){
+  async deleteAllUnits() {
     const queryBuilder = this.unitRepository.createQueryBuilder();
     queryBuilder.delete()
       .where({})

@@ -13,7 +13,7 @@ import { Challenge } from 'src/challenge/entities/challenge.entity';
 @Entity({ name: 'lesson' })
 export class Lesson {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
   @Column('text', { nullable: false })
