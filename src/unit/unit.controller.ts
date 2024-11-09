@@ -22,13 +22,13 @@ export class UnitController {
 
   @Patch(':id')
   @Auth(ValidRoles.ADMIN)
-  update(@Param('id') id: string, @Body() updateUnitDto: UpdateUnitDto) {
+  update(@Param('id') id: number, @Body() updateUnitDto: UpdateUnitDto) {
     return this.unitService.update(id, updateUnitDto);
   }
 
   @Delete(':id')
   @Auth(ValidRoles.ADMIN)
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.unitService.remove(id);
   }
   

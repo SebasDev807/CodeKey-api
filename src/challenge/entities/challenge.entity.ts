@@ -8,7 +8,7 @@ import { ChallengeOptions } from './challenge-option.entity';
 @Entity({ name: 'challenge' })
 export class Challenge {
 
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column({

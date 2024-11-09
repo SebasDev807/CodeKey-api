@@ -12,18 +12,18 @@ import { JwtStrategy } from './strategies/jwt-strategy';
 @Module({
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  imports:[
+  imports: [
     MailerModule,
     TypeOrmModule.forFeature([
       User
     ]),
 
     ConfigModule,
-    PassportModule.register({defaultStrategy: 'jwt'}),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      inject:[ConfigService],
-      useFactory: (configService:ConfigService) => {
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
         return {
           secret: configService.get<string>('JWT_SECRET'),
           signOptions: {
@@ -32,8 +32,15 @@ import { JwtStrategy } from './strategies/jwt-strategy';
         }
       }
     }),
-    
+
   ],
-  exports:[PassportModule, JwtStrategy, JwtModule]
+  exports: [
+    TypeOrmModule,
+    PassportModule,
+    JwtStrategy,
+    JwtModule,
+    AuthService
+  
+  ]
 })
-export class AuthModule {}
+export class AuthModule { }

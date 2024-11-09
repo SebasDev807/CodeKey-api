@@ -82,12 +82,20 @@ export class AuthService {
 
     delete user.password;
 
-    console.log(user);
     
     return {
       ...user,
       token: this.getJwtToken({ id: user.id })
     };
+  }
+
+  //!Ojo con esto.
+  async deleteAllUsers(){
+    const queryBuilder = this.userRepository.createQueryBuilder()
+    queryBuilder
+      .delete()
+      .where({})
+      .execute();
   }
 
 
@@ -105,8 +113,9 @@ export class AuthService {
 
     return { message: 'Cuenta verificada!' };
 
-
   }
+
+
 
 
   private getJwtToken(payload: JwtPayload) {

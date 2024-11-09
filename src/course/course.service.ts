@@ -85,7 +85,7 @@ export class CourseService {
       throw new NotFoundException(`Curso con termino '${term}' no existe.`)
     }
 
-    console.log(course);
+
     return course;
   }
 
@@ -121,6 +121,7 @@ export class CourseService {
     }
   }
 
+  //!Ojo con esto.
   async deleteAllCourses(){
     const query = this.courseRepository.createQueryBuilder('course');
     try {

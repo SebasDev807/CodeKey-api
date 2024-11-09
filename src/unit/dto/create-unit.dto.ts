@@ -1,7 +1,11 @@
-import { IsInt, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsInt, IsPositive, IsString, MaxLength, MinLength } from 'class-validator';
 import { Course } from 'src/course/entities/course.entity';
 
 export class CreateUnitDto {
+
+  @IsInt()
+  @IsPositive()
+  id:number;
 
   @MinLength(5)
   @MaxLength(50)

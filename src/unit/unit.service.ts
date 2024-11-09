@@ -10,7 +10,7 @@ import { Unit } from './entities/unit.entity';
 
 @Injectable()
 export class UnitService {
-  private readonly logger: Logger = new Logger('unit');
+  private readonly logger: Logger = new Logger('unitService');
 
   constructor(
     @InjectRepository(Unit)
@@ -51,7 +51,7 @@ export class UnitService {
     const order = !isNaN(Number(term)) ? Number(term) : null;
 
     unit = await queryBuilder
-      .leftJoinAndSelect('unit.course', 'course')
+      .leftJoinAndSelect('unit.lessons', 'lesson')
       .where('(unit.title ILIKE :title OR unit.order = :order)', {
         title: `%${term}%`,
         order,
@@ -61,8 +61,6 @@ export class UnitService {
       })
       .getOne();
 
-    // c.--km.
-
     if (!unit) {
       throw new NotFoundException(`Unidad con el termino ${term} no existe.`);
     }
@@ -71,7 +69,7 @@ export class UnitService {
 
   }
 
-  async update(id: string, updateUnitDto: UpdateUnitDto) {
+  async update(id: number, updateUnitDto: UpdateUnitDto) {
   
     const unit = await this.unitRepository.preload({
       id,
@@ -96,7 +94,7 @@ export class UnitService {
   }
 
 
-  async remove(id: string) {
+  async remove(id: number) {
 
     const unit = await this.unitRepository.findOneBy({ id });
  
@@ -106,6 +104,13 @@ export class UnitService {
 
     await this.unitRepository.remove(unit);
 
+  }
+
+  async deleteAllUnits(){
+    const queryBuilder = this.unitRepository.createQueryBuilder();
+    queryBuilder.delete()
+      .where({})
+      .execute();
   }
 
 }

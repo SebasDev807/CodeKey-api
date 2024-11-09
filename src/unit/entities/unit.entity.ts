@@ -1,13 +1,13 @@
 import { Course } from 'src/course/entities/course.entity';
 import { Lesson } from 'src/lesson/entities/lesson.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'unit' })
 
 export class Unit {
 
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
+  @PrimaryColumn()
+  public id: number;
 
   @Column('text', { nullable: false })
   public title: string;

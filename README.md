@@ -64,9 +64,15 @@ yarn install
 ```bash
   yarn start:dev
 ```
+9. Llenar la base de datos(Ejecutar la semilla) > **Advertencia:**: Solo ejecutar una vez
+
+```bash
+  http://localhost:3000/api/v1/seed
+```
 
 ### API Endpoints
 Accede al siguiente url para visualizar la documentación
+
 ```
 http://localhost:3000/api
 ```

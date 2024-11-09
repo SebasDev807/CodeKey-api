@@ -1,16 +1,76 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { CreateLessonDto } from './dto/create-lesson.dto';
 import { UpdateLessonDto } from './dto/update-lesson.dto';
+import { Repository } from 'typeorm';
+import { Lesson } from './entities/lesson.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Unit } from 'src/unit/entities/unit.entity';
+import { PaginationDto } from '../common/dtos/pagination.dto';
+
 
 @Injectable()
 export class LessonService {
-  
-  create(createLessonDto: CreateLessonDto) {
-    return 'This action adds a new lesson';
+
+  private readonly logger = new Logger('LessonsService');
+
+  constructor(
+
+    @InjectRepository(Lesson)
+    private readonly lessonRepository: Repository<Lesson>,
+
+    @InjectRepository(Unit)
+    private readonly unitRepository: Repository<Unit>
+
+  ) { }
+
+  async create(createLessonDto: CreateLessonDto) {
+
+    const { unit } = createLessonDto;
+
+    const existUnit = await this.unitRepository.findOneBy({ id: +unit });
+
+    if (!existUnit) {
+      throw new NotFoundException(`Unit with id ${unit} not found`);
+    }
+
+    const lesson = this.lessonRepository.create(createLessonDto);
+    await this.lessonRepository.save(lesson);
+
+    return lesson;
+
   }
 
-  findAll() {
-    return `This action returns all lesson`;
+
+  async findAll(unit: number, paginationDto: PaginationDto) {
+
+    const { limit = 10, offset = 0 } = paginationDto;
+
+    try {
+
+      const queryBuilder = this.lessonRepository.createQueryBuilder('lesson');
+
+      const lessons = await queryBuilder
+        .where('lesson.unitId =:unit', {
+          unit
+        })
+        .limit(limit)
+        .offset(offset)
+        .getMany();
+
+      return lessons;
+
+    } catch (error) {
+
+      this.logger.error(error);
+      throw new InternalServerErrorException('Algo salio mal.');
+    }
+  }
+
+  async deleteAllLessons() {
+    const queryBuilder = this.lessonRepository.createQueryBuilder();
+      queryBuilder.delete()
+        .where({})
+        .execute();
   }
 
   findOne(id: number) {
@@ -24,5 +84,6 @@ export class LessonService {
   remove(id: number) {
     return `This action removes a #${id} lesson`;
   }
-  
+
 }
+

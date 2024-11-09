@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Unit } from 'src/unit/entities/unit.entity';
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'courses' })
 
 export class Course {
 
-  @PrimaryGeneratedColumn('increment') 
+  @PrimaryColumn()
   id: number;
 
   @ApiProperty({

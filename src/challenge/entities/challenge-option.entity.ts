@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'option_challenge' })
 export class ChallengeOptions {
 
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn()
     public id: number;
 
     @Column('text', { name: 'text', nullable: false })

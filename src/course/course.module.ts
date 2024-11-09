@@ -14,5 +14,9 @@ import { AuthModule } from 'src/auth/auth.module';
     ]),
     AuthModule
   ],
+  exports:[
+    CourseService,
+    TypeOrmModule
+  ]
 })
 export class CourseModule { }

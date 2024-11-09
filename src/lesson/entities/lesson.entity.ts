@@ -5,28 +5,35 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Challenge } from 'src/challenge/entities/challenge.entity';
 
-@Entity({ name: 'lesson' }) // Asegúrate de que el nombre sea correcto
+@Entity({ name: 'lesson' })
 export class Lesson {
 
-  @PrimaryGeneratedColumn('increment')
-  public id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('text', { nullable: false })
-  public title: string;
+  title: string;
 
   @Column('int', { unique: true, nullable: false })
-  public order: number;
+  order: number;
+
+  @Column('text')
+  text:string;
+  
+  @Column('text')
+  code: string;
 
   @ManyToOne(
     () => Unit,
     unit => unit.lessons,
     { onDelete: 'CASCADE' }
   )
-  public unit: Unit;
+  unit: Unit;
 
 
   @OneToMany(
@@ -34,7 +41,7 @@ export class Lesson {
     challenge => challenge.lesson,
     { onDelete: 'CASCADE' }
   )
-  public challenges: Challenge[]
+  challenges: Challenge[]
 }
 
 

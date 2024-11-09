@@ -7,6 +7,7 @@ import { LessonModule } from './lesson/lesson.module';
 import { UnitModule } from './unit/unit.module';
 import { AuthModule } from './auth/auth.module';
 import { ChallengeModule } from './challenge/challenge.module';
+import { SeedModule } from './seed/seed.module';
 
 
 @Module({
@@ -30,6 +31,7 @@ import { ChallengeModule } from './challenge/challenge.module';
     LessonModule,
     UnitModule,
     ChallengeModule,
+    SeedModule,
     // OptionChallengeModule,
   ],
 

@@ -5,7 +5,7 @@ import { User } from 'src/auth/entities/user.entity';
 @Entity({ name: 'challenge_progress' })
 export class ChallengeProgress {
 
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @ManyToOne(
