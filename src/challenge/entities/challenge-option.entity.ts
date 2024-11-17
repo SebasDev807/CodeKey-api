@@ -1,30 +1,35 @@
-import { Challenge } from 'src/challenge/entities/challenge.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Challenge } from './challenge.entity';
 
-@Entity({ name: 'option_challenge' })
+@Entity({ name: 'challenge_option' })
 export class ChallengeOptions {
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    public id: number;
+  @Column({ name: 'challenge_id', nullable: false })
+  challengeId: number;
 
-    @Column('text', { name: 'text', nullable: false })
-    public text: string;
+  @Column({ type: 'text', nullable: false })
+  text: string;
 
-    @Column('boolean', { name: 'correct', nullable: false })
-    public correct: boolean;
+  @Column({ type: 'boolean', nullable: false })
+  correct: boolean;
 
-    @Column('text', { name: 'image_src' })
-    public imageSrc: string;
+  @Column({ name: 'image_src', type: 'text', nullable: true })
+  imageSrc: string;
 
-    @Column('text', { name: 'audio_src' })
-    public audio_src: string;
+  @Column({ name: 'audio_src', type: 'text', nullable: true })
+  audioSrc: string;
 
-    // relation
-    @ManyToOne(
-        () => Challenge,
-        challenge => challenge.challengeOptions,
-        { onDelete: 'CASCADE' }
-    )
-    // @JoinColumn({ name: 'challenge_id' })
-    public challenge: Challenge;
+  @ManyToOne(() => Challenge, (challenge) => challenge.challengeOptions, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'challenge_id' })
+  challenge: Challenge;
 }

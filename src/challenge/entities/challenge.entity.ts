@@ -1,50 +1,46 @@
-
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { Lesson } from 'src/lesson/entities/lesson.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ChallengeType } from '../interfaces/challenge-type.enum';
 import { ChallengeOptions } from './challenge-option.entity';
+import { ChallengeProgress } from './challenge-progress.entity';
 
-
-@Entity({ name: 'challenge' })
+@Entity({ name: 'challenges' })
 export class Challenge {
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
-  @PrimaryGeneratedColumn()
-  id: string;
+  @Column({ name: 'lesson_id', nullable: false })
+  lessonId: number;
 
   @Column({
     type: 'enum',
     enum: ChallengeType,
-    default: ChallengeType.SELECT,
+    nullable: false,
   })
-  challengeType: ChallengeType;
+  type: ChallengeType;
 
-  @Column('text', { nullable: false })
+  @Column({ type: 'text', nullable: false })
   question: string;
 
-
-  @Column('int', { unique: true, nullable: false })
+  @Column({ type: 'integer', nullable: false })
   order: number;
 
-
-  @ManyToOne(
-    () => Lesson,
-    lesson => lesson.challenges,
-    { onDelete: 'CASCADE' }
-  )
+  @ManyToOne(() => Lesson, (lesson) => lesson.challenges, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'lesson_id' })
   lesson: Lesson;
 
-  @OneToMany(
-    () => ChallengeOptions,
-    ChallengeOptions => ChallengeOptions.challenge,
-    { cascade: true, },
-  )
+  @OneToMany(() => ChallengeOptions, (option) => option.challenge)
   challengeOptions: ChallengeOptions[];
 
-
+  @OneToMany(() => ChallengeProgress, (progress) => progress.challenge)
+  challengeProgress: ChallengeProgress[];
 }
-
-// @ManyToOne(() => Lesson, (lesson) => lesson.challenge, {
-//   onDelete: 'CASCADE',
-// })
-// @JoinColumn({ name: 'lesson_id' })
-// public lesson: Lesson;

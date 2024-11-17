@@ -1,17 +1,29 @@
-import { Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Challenge } from './challenge.entity';
-import { User } from 'src/auth/entities/user.entity';
 
 @Entity({ name: 'challenge_progress' })
 export class ChallengeProgress {
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column({ name: 'user_id', nullable: false })
+  userId: string;
 
-    @ManyToOne(
-        () => User,
-        user => user.progress,
-        { onDelete: 'CASCADE' }
-    )
-    user: User;
+  @Column({ name: 'challenge_id', nullable: false })
+  challengeId: number;
+
+  @Column({ default: false, nullable: false })
+  completed: boolean;
+
+  @ManyToOne(() => Challenge, (challenge) => challenge.challengeProgress, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'challenge_id' })
+  challenge: Challenge;
 }
