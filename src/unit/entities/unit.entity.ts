@@ -3,10 +3,8 @@ import { Lesson } from 'src/lesson/entities/lesson.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'unit' })
-
 export class Unit {
-
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   public id: number;
 
   @Column('text', { nullable: false })
@@ -15,19 +13,11 @@ export class Unit {
   @Column('text', { nullable: false })
   public description: string;
 
-  @ManyToOne(
-    () => Course,
-    course => course.units,
-    { onDelete: 'CASCADE' }
-  )
+  @ManyToOne(() => Course, (course) => course.units, { onDelete: 'CASCADE' })
   public course: Course;
 
-  @OneToMany(
-    () => Lesson,
-    lesson => lesson.unit,
-    { onDelete: 'CASCADE' }
-  )
-  public lessons: Lesson[]
+  @OneToMany(() => Lesson, (lesson) => lesson.unit, { onDelete: 'CASCADE' })
+  public lessons: Lesson[];
 
   @Column('int', { unique: true, nullable: false })
   public order: number;

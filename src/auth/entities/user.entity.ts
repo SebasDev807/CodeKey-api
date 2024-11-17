@@ -2,12 +2,15 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  BeforeInsert,
+  ManyToOne,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { ChallengeProgress } from 'src/challenge/entities/challenge-progress.entity';
+import { Course } from 'src/course/entities/course.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { ChallengeProgress } from 'src/challenge/entities/challenge-progress.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity('users')
 export class User {
@@ -22,10 +25,30 @@ export class User {
   name: string;
 
   @ApiProperty({
-    example: 'example@unimayor.edu.co',
-    description: 'user email',
+    example: 'https://img.clerk.com/<hash>',
+    description: 'user image',
     uniqueItems: true,
   })
+  @Column({
+    type: 'text',
+    nullable: false,
+    name: 'image_src',
+    default: 'mascot.svg',
+  })
+  imageSrc: string;
+
+  @ApiProperty({
+    example: '1',
+    description: 'Reference witch one course is doing the user',
+    uniqueItems: true,
+  })
+  @ManyToOne(() => Course, (course) => course.users, {
+    nullable: false,
+    onDelete: 'CASCADE',
+    lazy: true,
+  })
+  activeCourse: Promise<Course>;
+
   @Column({ type: 'text', nullable: false })
   email: string;
 
@@ -45,14 +68,20 @@ export class User {
   @Column('text', { array: true, default: ['USER'] })
   roles: string[];
 
-  // @OneToMany(
-  //     () => ChallengeProgress,
-  //     challengeProgress => challengeProgress.user,
-  //     { onDelete: 'CASCADE' }
-  // )
-  // progress: ChallengeProgress[];
+  @Column({ type: 'int', nullable: false, default: 5 })
+  hearts: number;
 
-  //Antes de insertar hashea la contraseña
+  @Column({ type: 'int', nullable: false, default: 0 })
+  points: number;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  validateHearts() {
+    if (this.hearts > 5) {
+      this.hearts = 5;
+    }
+  }
+
   @BeforeInsert()
   async hashPassword() {
     const salt = bcrypt.genSaltSync(10);

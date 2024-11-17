@@ -8,15 +8,17 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt-strategy';
+import { Course } from 'src/course/entities/course.entity';
 
 @Module({
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
   imports: [
     MailerModule,
-    TypeOrmModule.forFeature([
-      User
-    ]),
+    TypeOrmModule.forFeature([User, Course]),
+    // TypeOrmModule.forFeature([
+    //   User
+    // ]),
 
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -27,20 +29,12 @@ import { JwtStrategy } from './strategies/jwt-strategy';
         return {
           secret: configService.get<string>('JWT_SECRET'),
           signOptions: {
-            expiresIn: '4h'
-          }
-        }
-      }
+            expiresIn: '4h',
+          },
+        };
+      },
     }),
-
   ],
-  exports: [
-    TypeOrmModule,
-    PassportModule,
-    JwtStrategy,
-    JwtModule,
-    AuthService
-  
-  ]
+  exports: [TypeOrmModule, PassportModule, JwtStrategy, JwtModule, AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}
