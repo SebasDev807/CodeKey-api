@@ -59,7 +59,7 @@ interface SeedChallengeOptions {
   text: string;
   challenge: number;
   charOrder: ChallengeChars;
-  correct:boolean;
+  correct: boolean;
 }
 
 export const seedData: SeedData = {
@@ -519,13 +519,13 @@ export const seedData: SeedData = {
       text: 'Número',
       challenge: 1,
       charOrder: 'a',
-      correct: true,
+      correct: false,
     },
     {
       text: 'Cadena',
       challenge: 1,
       charOrder: 'b',
-      correct: false,
+      correct: true,
     },
     {
       text: 'Booleano',
@@ -539,6 +539,7 @@ export const seedData: SeedData = {
       charOrder: 'd',
       correct: false,
     },
+
 
     //Desafio 2
     {
@@ -566,6 +567,7 @@ export const seedData: SeedData = {
       correct: false,
     },
 
+
     //Desafío 3
     {
       text: '/* comentario */',
@@ -591,13 +593,14 @@ export const seedData: SeedData = {
       charOrder: 'd',
       correct: false,
     },
-    
+
+
     //Desafío 4
     {
       text: '8',
       challenge: 4,
       charOrder: 'a',
-      correct: true,
+      correct: false,
     },
     {
       text: '5',
@@ -609,7 +612,7 @@ export const seedData: SeedData = {
       text: '3',
       challenge: 4,
       charOrder: 'c',
-      correct: false,
+      correct: true,
     },
     {
       text: '10',
@@ -617,6 +620,7 @@ export const seedData: SeedData = {
       charOrder: 'd',
       correct: false,
     },
+
 
     //Desafío 5
     {
@@ -643,10 +647,6 @@ export const seedData: SeedData = {
       charOrder: 'd',
       correct: false,
     },
-    
-    
-
-    
   ]
 
 };
