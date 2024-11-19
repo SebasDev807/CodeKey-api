@@ -56,7 +56,6 @@ export class LessonService {
         .orderBy('options.charOrder', 'ASC')
         .getMany();
 
-      console.log({ lessons });
       return lessons;
 
     } catch (error) {

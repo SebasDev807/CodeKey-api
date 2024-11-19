@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpCode } from '@nestjs/common';
 import { CheckAnswerService } from './check-answer.service';
 import { AnswerSubmitDto } from './dto/check-answer.dto';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles.enum';
@@ -9,7 +9,8 @@ export class CheckAnswerController {
   constructor(private readonly checkAnswerService: CheckAnswerService) { }
 
   @Post('compare')
-  @Auth(ValidRoles.USER)
+  @Auth(ValidRoles.USER, ValidRoles.ADMIN)
+  @HttpCode(200)
   compare(
     @Body() answerSubmit: AnswerSubmitDto,
     @Query('challenge') challengeId: number
@@ -17,4 +18,13 @@ export class CheckAnswerController {
     return this.checkAnswerService.compare(answerSubmit, challengeId);
   }
 
+
+  @Post('compile')
+  @Auth(ValidRoles.USER, ValidRoles.ADMIN)
+  @HttpCode(200)
+  compileCode(
+    @Body('code') code: string,
+    @Query('challenge-code') challengeCodeId: number) {
+    return this.checkAnswerService.compileCode(code, +challengeCodeId);
+  }
 }

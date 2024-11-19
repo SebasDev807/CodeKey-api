@@ -7,6 +7,7 @@ import { ChallengeOptions } from './entities/challenge-option.entity';
 import { ChallengeProgress } from './entities/challenge-progress.entity';
 import { AuthModule } from 'src/auth/auth.module';
 import { LessonModule } from 'src/lesson/lesson.module';
+import { ChallengeCode } from './entities/challenge-code';
 
 @Module({
   controllers: [ChallengeController],
@@ -15,7 +16,8 @@ import { LessonModule } from 'src/lesson/lesson.module';
     TypeOrmModule.forFeature([
       Challenge,
       ChallengeOptions,
-      ChallengeProgress
+      ChallengeProgress,
+      ChallengeCode
     ]),
     LessonModule,
     AuthModule
@@ -23,7 +25,7 @@ import { LessonModule } from 'src/lesson/lesson.module';
   exports: [
     TypeOrmModule,
     ChallengeService
-  
+
   ]
 })
 export class ChallengeModule { }

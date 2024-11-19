@@ -5,10 +5,12 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Challenge } from 'src/challenge/entities/challenge.entity';
+import { ChallengeCode } from 'src/challenge/entities/challenge-code';
 
 @Entity({ name: 'lesson' })
 export class Lesson {
@@ -23,8 +25,8 @@ export class Lesson {
   order: number;
 
   @Column('text')
-  text:string;
-  
+  text: string;
+
   @Column('text')
   code: string;
 
@@ -41,7 +43,14 @@ export class Lesson {
     challenge => challenge.lesson,
     { onDelete: 'CASCADE' }
   )
-  challenges: Challenge[]
+  challenges: Challenge[];
+
+  @OneToMany(
+    () => ChallengeCode,
+    challengeCode => challengeCode.lesson,
+    { onDelete: 'CASCADE' }
+  )
+  challengeCodes: ChallengeCode[];
 }
 
 

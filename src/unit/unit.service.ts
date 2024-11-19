@@ -47,7 +47,7 @@ export class UnitService {
   async findAll(course: number) {
 
   
-    console.log(course);
+   
 
     const queryBuilder = await this.unitRepository.createQueryBuilder('unit')
    
@@ -58,7 +58,6 @@ export class UnitService {
       })
       .getMany();
 
-    console.log(units);
     return units
   }
 
@@ -71,7 +70,6 @@ export class UnitService {
 
     const order = !isNaN(Number(term)) ? Number(term) : null;
 
-    console.log(typeof order);
 
     unit = await queryBuilder
       .leftJoinAndSelect('unit.lessons', 'lesson')

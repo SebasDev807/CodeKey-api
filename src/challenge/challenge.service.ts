@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from 'src/lesson/entities/lesson.entity';
 import { ChallengeOptions } from './entities/challenge-option.entity';
 import { CreateChallengeOptionDto } from './dto/challenge-options/create-challenge-option.dto';
+import { ChallengeCode } from './entities/challenge-code';
 
 @Injectable()
 export class ChallengeService {
@@ -21,7 +22,10 @@ export class ChallengeService {
     private readonly lessonRepository: Repository<Lesson>,
 
     @InjectRepository(ChallengeOptions)
-    private readonly challengeOptionsRepository: Repository<ChallengeOptions>
+    private readonly challengeOptionsRepository: Repository<ChallengeOptions>,
+
+    @InjectRepository(ChallengeCode)
+    private readonly challengeCodeRepository: Repository<ChallengeCode>
 
   ) { }
 
@@ -80,19 +84,29 @@ export class ChallengeService {
     return challenge;
   }
 
-  async deleteAllChallenges(){
-    const queryBuilderChallenge =  this.challengeRepository.createQueryBuilder();
-    const queryBuilderChallengeOpt =  this.challengeOptionsRepository.createQueryBuilder();
-    
+  async getChallengeCode(id: number) {
+
+    const challengeCode = await this.challengeCodeRepository.findOneBy({ id });
+
+    return challengeCode;
+
+  }
+
+  async deleteAllChallenges() {
+    const queryBuilderChallenge = this.challengeRepository.createQueryBuilder();
+    const queryBuilderChallengeOpt = this.challengeOptionsRepository.createQueryBuilder();
+
 
     await queryBuilderChallenge.delete()
       .where({})
       .execute();
 
-    await  queryBuilderChallengeOpt.delete()
+    await queryBuilderChallengeOpt.delete()
       .where({})
       .execute();
   }
+
+
 
 
 
