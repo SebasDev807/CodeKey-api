@@ -32,7 +32,7 @@ export class LessonController {
     @Param('unit') unit: number,
     @Query() paginationDto: PaginationDto
   ) {
-    return this.lessonService.findAll(+unit, paginationDto);
+    return this.lessonService.findAll(+unit);
   }
 
   @Get(':id')

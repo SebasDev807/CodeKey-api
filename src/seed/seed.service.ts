@@ -11,6 +11,10 @@ import { Repository } from 'typeorm';
 import { Course } from 'src/course/entities/course.entity';
 import { Unit } from 'src/unit/entities/unit.entity';
 import { Lesson } from 'src/lesson/entities/lesson.entity';
+import { Challenge } from 'src/challenge/entities/challenge.entity';
+import { ChallengeType } from 'src/challenge/interfaces/challenge-type.enum';
+import { ChallengeService } from '../challenge/challenge.service';
+import { ChallengeOptions } from 'src/challenge/entities/challenge-option.entity';
 
 @Injectable()
 export class SeedService {
@@ -22,6 +26,7 @@ export class SeedService {
     private readonly courseService: CourseService,
     private readonly unitService: UnitService,
     private readonly lessonService: LessonService,
+    private readonly challengeService: ChallengeService,
 
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -35,6 +40,12 @@ export class SeedService {
     @InjectRepository(Lesson)
     private readonly lessonRepository: Repository<Lesson>,
 
+    @InjectRepository(Challenge)
+    private readonly challengeRepository: Repository<Challenge>,
+
+    @InjectRepository(ChallengeOptions)
+    private readonly challengeOptRepository: Repository<ChallengeOptions>
+
 
   ) { }
 
@@ -44,6 +55,8 @@ export class SeedService {
     await this.insertCourses();
     await this.insertUnits();
     await this.insertLessons();
+    await this.insertChallenges();
+    await this.insertChallengeOptions();
     return 'Seed executed';
   }
 
@@ -68,8 +81,6 @@ export class SeedService {
     await this.courseRepository.save(courses);
 
   }
-
-
 
 
   private async insertUnits() {
@@ -114,13 +125,58 @@ export class SeedService {
 
   }
 
+  private async insertChallenges() {
+    const seedChallenge = seedData.challenges;
+    const challenges: Challenge[] = [];
+
+    for (const challenge of seedChallenge) {
+
+      const lesson = await this.lessonRepository.findOneBy({ id: challenge.lesson });
+
+      const challengeType = challenge.challengeType as ChallengeType;
+
+      const challengeEntity = await this.challengeRepository.create({
+        ...challenge,
+        lesson: { id: lesson.id },
+        challengeType,
+      });
+
+      challenges.push(challengeEntity);
+    }
+
+
+    await this.challengeRepository.save(challenges);
+  }
+
+
+  private async insertChallengeOptions() {
+
+    const seedChallengeOpts = seedData.challengeOptions;
+    const challenges: ChallengeOptions[] = [];
+
+    for (const challengeOpt of seedChallengeOpts) {
+      const challenge = await this.challengeRepository.findOneBy({ id: challengeOpt.challenge });
+
+      const challengeOptEntity = await this.challengeOptRepository.create({
+        ...challengeOpt,
+        challenge
+      });
+
+      challenges.push(challengeOptEntity);
+
+      await this.challengeOptRepository.save(challenges);
+
+    }
+  }
+
 
   private async deleteTables() {
     const promises = [
       this.authService.deleteAllUsers(),
       this.courseService.deleteAllCourses(),
       this.unitService.deleteAllUnits(),
-      this.lessonService.deleteAllLessons()
+      this.lessonService.deleteAllLessons(),
+      this.challengeService.deleteAllChallenges()
     ];
     await Promise.all(promises);
 

@@ -80,6 +80,20 @@ export class ChallengeService {
     return challenge;
   }
 
+  async deleteAllChallenges(){
+    const queryBuilderChallenge =  this.challengeRepository.createQueryBuilder();
+    const queryBuilderChallengeOpt =  this.challengeOptionsRepository.createQueryBuilder();
+    
+
+    await queryBuilderChallenge.delete()
+      .where({})
+      .execute();
+
+    await  queryBuilderChallengeOpt.delete()
+      .where({})
+      .execute();
+  }
+
 
 
 }

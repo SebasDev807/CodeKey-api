@@ -1,8 +1,10 @@
 import { Course } from "src/course/entities/course.entity";
+import { ChallengeOptions } from '../../challenge/entities/challenge-option.entity';
 
 
 type ValidRoles = 'ADMIN' | 'USER' | 'GUEST';
-
+type challengeTypes = 'SELECT';
+type ChallengeChars = 'a' | 'b' | 'c' | 'd';
 
 interface SeedUser {
   name: string;
@@ -41,8 +43,24 @@ interface SeedData {
   courses: SeedCourse[];
   units: SeedUnit[];
   lessons: SeedLesson[];
+  challenges: SeedChallenges[];
+  challengeOptions: SeedChallengeOptions[]
 }
 
+interface SeedChallenges {
+  id: number,
+  challengeType: string,
+  question: string,
+  order: number,
+  lesson: number
+}
+
+interface SeedChallengeOptions {
+  text: string;
+  challenge: number;
+  charOrder: ChallengeChars;
+  correct:boolean;
+}
 
 export const seedData: SeedData = {
   users: [
@@ -309,5 +327,330 @@ export const seedData: SeedData = {
       order: 25,
       unit: 5,
     },
+  ],
+  challenges: [
+    // Challenges for Unit 1
+    {
+      id: 1,
+      challengeType: "SELECT",
+      question: "¿Qué tipo de dato es '42' en JavaScript?",
+      order: 1,
+      lesson: 2
+    },
+    {
+      id: 2,
+      challengeType: "SELECT",
+      question: "¿Qué operador se utiliza para concatenar cadenas en JavaScript?",
+      order: 2,
+      lesson: 4
+    },
+    {
+      id: 3,
+      challengeType: "SELECT",
+      question: "¿Qué método se usa para agregar un comentario en varias líneas?",
+      order: 3,
+      lesson: 5
+    },
+    {
+      id: 4,
+      challengeType: "SELECT",
+      question: "¿Cuál es el valor de la variable `suma` en el siguiente código: `let suma = 3 + 5;`?",
+      order: 4,
+      lesson: 3
+    },
+    {
+      id: 5,
+      challengeType: "SELECT",
+      question: "¿Cómo se puede mostrar un mensaje en la consola?",
+      order: 5,
+      lesson: 1
+    },
+    // Challenges for Unit 2
+    {
+      id: 6,
+      challengeType: "SELECT",
+      question: "¿Qué palabra clave se usa para crear una condición en JavaScript?",
+      order: 6,
+      lesson: 6
+    },
+    {
+      id: 7,
+      challengeType: "SELECT",
+      question: "¿Cómo se utiliza un `else` en una sentencia `if`?",
+      order: 7,
+      lesson: 7
+    },
+    {
+      id: 8,
+      challengeType: "SELECT",
+      question: "¿Cuál de los siguientes bucles se ejecuta al menos una vez?",
+      order: 8,
+      lesson: 8
+    },
+    {
+      id: 9,
+      challengeType: "SELECT",
+      question: "¿Cómo puedes hacer un bucle que se ejecute mientras una condición sea verdadera?",
+      order: 9,
+      lesson: 9
+    },
+    {
+      id: 10,
+      challengeType: "SELECT",
+      question: "¿Cuál es el valor impreso en consola si `dia = 3`?",
+      order: 10,
+      lesson: 10
+    },
+
+    // Challenges for Unit 3
+    {
+      id: 11,
+      challengeType: "SELECT",
+      question: "¿Cómo se declaran funciones en JavaScript?",
+      order: 11,
+      lesson: 11
+    },
+    {
+      id: 12,
+      challengeType: "SELECT",
+      question: "¿Cuál es el resultado de la función `multiplicar(3, 4)`?",
+      order: 12,
+      lesson: 12
+    },
+    {
+      id: 13,
+      challengeType: "SELECT",
+      question: "¿Qué tipo de ámbito tiene una variable definida dentro de una función?",
+      order: 13,
+      lesson: 13
+    },
+    {
+      id: 14,
+      challengeType: "SELECT",
+      question: "¿Cómo se puede escribir una función con sintaxis más corta?",
+      order: 14,
+      lesson: 14
+    },
+    {
+      id: 15,
+      challengeType: "SELECT",
+      question: "¿Qué hace una función cuando es asignada a una variable?",
+      order: 15,
+      lesson: 15
+    },
+
+    // Challenges for Unit 4
+    {
+      id: 16,
+      challengeType: "SELECT",
+      question: "¿Qué método de array se usa para agregar elementos al final de un array?",
+      order: 16,
+      lesson: 16
+    },
+    {
+      id: 17,
+      challengeType: "SELECT",
+      question: "¿Cuál es el valor del array `frutas` después de ejecutar `frutas.push('naranja')`?",
+      order: 17,
+      lesson: 17
+    },
+    {
+      id: 18,
+      challengeType: "SELECT",
+      question: "¿Qué valor se imprimirá si usamos `colores.pop()` en el array `['rojo', 'azul', 'verde']`?",
+      order: 18,
+      lesson: 18
+    },
+    {
+      id: 19,
+      challengeType: "SELECT",
+      question: "¿Qué método se usa para recorrer todos los elementos de un array?",
+      order: 19,
+      lesson: 19
+    },
+    {
+      id: 20,
+      challengeType: "SELECT",
+      question: "¿Cómo filtrarías los números pares de un array?",
+      order: 20,
+      lesson: 20
+    },
+
+    // Challenges for Unit 5
+    {
+      id: 21,
+      challengeType: "SELECT",
+      question: "¿Cómo se accede a las propiedades de un objeto?",
+      order: 21,
+      lesson: 21
+    },
+    {
+      id: 22,
+      challengeType: "SELECT",
+      question: "¿Qué valor se imprimirá si usamos `console.log(coche.marca)`?",
+      order: 22,
+      lesson: 22
+    },
+    {
+      id: 23,
+      challengeType: "SELECT",
+      question: "¿Cómo se define un método dentro de un objeto?",
+      order: 23,
+      lesson: 23
+    },
+    {
+      id: 24,
+      challengeType: "SELECT",
+      question: "¿Cómo accederías a una propiedad de un objeto anidado?",
+      order: 24,
+      lesson: 24
+    },
+    {
+      id: 25,
+      challengeType: "SELECT",
+      question: "¿Qué imprime el siguiente código: `persona.presentar()` donde `persona` es un objeto con un método `presentar`?",
+      order: 25,
+      lesson: 25
+    },
+  ],
+  challengeOptions: [
+    //Desafío 1
+    {
+      text: 'Número',
+      challenge: 1,
+      charOrder: 'a',
+      correct: true,
+    },
+    {
+      text: 'Cadena',
+      challenge: 1,
+      charOrder: 'b',
+      correct: false,
+    },
+    {
+      text: 'Booleano',
+      challenge: 1,
+      charOrder: 'c',
+      correct: false,
+    },
+    {
+      text: 'Objeto',
+      challenge: 1,
+      charOrder: 'd',
+      correct: false,
+    },
+
+    //Desafio 2
+    {
+      text: 'El operador +',
+      challenge: 2,
+      charOrder: 'a',
+      correct: true,
+    },
+    {
+      text: 'El operador *',
+      challenge: 2,
+      charOrder: 'b',
+      correct: false,
+    },
+    {
+      text: 'El operador &',
+      challenge: 2,
+      charOrder: 'c',
+      correct: false,
+    },
+    {
+      text: 'El operador -',
+      challenge: 2,
+      charOrder: 'd',
+      correct: false,
+    },
+
+    //Desafío 3
+    {
+      text: '/* comentario */',
+      challenge: 3,
+      charOrder: 'a',
+      correct: true,
+    },
+    {
+      text: '// comentario',
+      challenge: 3,
+      charOrder: 'b',
+      correct: false,
+    },
+    {
+      text: '/* comentario',
+      challenge: 3,
+      charOrder: 'c',
+      correct: false,
+    },
+    {
+      text: '/** comentario **/',
+      challenge: 3,
+      charOrder: 'd',
+      correct: false,
+    },
+    
+    //Desafío 4
+    {
+      text: '8',
+      challenge: 4,
+      charOrder: 'a',
+      correct: true,
+    },
+    {
+      text: '5',
+      challenge: 4,
+      charOrder: 'b',
+      correct: false,
+    },
+    {
+      text: '3',
+      challenge: 4,
+      charOrder: 'c',
+      correct: false,
+    },
+    {
+      text: '10',
+      challenge: 4,
+      charOrder: 'd',
+      correct: false,
+    },
+
+    //Desafío 5
+    {
+      text: 'console.log()',
+      challenge: 5,
+      charOrder: 'a',
+      correct: true,
+    },
+    {
+      text: 'alert()',
+      challenge: 5,
+      charOrder: 'b',
+      correct: false,
+    },
+    {
+      text: 'document.write()',
+      challenge: 5,
+      charOrder: 'c',
+      correct: false,
+    },
+    {
+      text: 'console.alert()',
+      challenge: 5,
+      charOrder: 'd',
+      correct: false,
+    },
+    
+    
+
+    
   ]
+
 };
+
+
+
+

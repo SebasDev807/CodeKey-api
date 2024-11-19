@@ -20,6 +20,10 @@ import { LessonModule } from 'src/lesson/lesson.module';
     LessonModule,
     AuthModule
   ],
-  exports: [TypeOrmModule]
+  exports: [
+    TypeOrmModule,
+    ChallengeService
+  
+  ]
 })
 export class ChallengeModule { }

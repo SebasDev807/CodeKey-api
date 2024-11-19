@@ -41,9 +41,7 @@ export class LessonService {
   }
 
 
-  async findAll(unit: number, paginationDto: PaginationDto) {
-
-    const { limit = 10, offset = 0 } = paginationDto;
+  async findAll(unit: number) {
 
     try {
 
@@ -56,10 +54,9 @@ export class LessonService {
         .leftJoinAndSelect('lesson.challenges', 'challenges')
         .leftJoinAndSelect('challenges.challengeOptions', 'options')
         .orderBy('options.charOrder', 'ASC')
-        .limit(limit)
-        .offset(offset)
         .getMany();
 
+      console.log({ lessons });
       return lessons;
 
     } catch (error) {

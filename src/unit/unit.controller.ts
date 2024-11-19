@@ -17,13 +17,14 @@ export class UnitController {
   }
 
   @Get('findMany/:courseId')
+  @Auth(ValidRoles.USER)
   findAll(
     @Param('courseId') course: number) {
     return this.unitService.findAll(course);
-
   }
 
   @Get(':term')
+  @Auth(ValidRoles.USER)
   findOne(@Param('term') term: string, @Query('course') course: number) {
     return this.unitService.findOne(term, +course);
   }
