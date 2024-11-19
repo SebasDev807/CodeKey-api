@@ -1,6 +1,6 @@
 
 import { Lesson } from 'src/lesson/entities/lesson.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { ChallengeType } from '../interfaces/challenge-type.enum';
 import { ChallengeOptions } from './challenge-option.entity';
 
@@ -8,8 +8,8 @@ import { ChallengeOptions } from './challenge-option.entity';
 @Entity({ name: 'challenge' })
 export class Challenge {
 
-  @PrimaryGeneratedColumn()
-  id: string;
+  @PrimaryColumn()
+  id: number;
 
   @Column({
     type: 'enum',

@@ -4,7 +4,7 @@ import { CreateUnitDto } from './dto/create-unit.dto';
 import { UpdateUnitDto } from './dto/update-unit.dto';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles.enum';
 import { Auth } from '../auth/decorators/role-protected/auth.decorator';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
+
 
 @Controller('unit')
 export class UnitController {
@@ -19,7 +19,7 @@ export class UnitController {
   @Get('findMany/:courseId')
   findAll(
     @Param('courseId') course: number) {
-    return this.unitService.findAll(course,);
+    return this.unitService.findAll(course);
 
   }
 

@@ -64,12 +64,14 @@ export class UnitService {
 
 
 
-  async findOne(term: string, course: number) {
+  async findOne(term: string, course: number = 1) {
     let unit: Unit;
 
     const queryBuilder = this.unitRepository.createQueryBuilder('unit');
 
     const order = !isNaN(Number(term)) ? Number(term) : null;
+
+    console.log(typeof order);
 
     unit = await queryBuilder
       .leftJoinAndSelect('unit.lessons', 'lesson')
@@ -78,7 +80,7 @@ export class UnitService {
         order,
       })
       .andWhere('unit."courseId" = :course', {
-        course,
+        course
       })
       .getOne();
 

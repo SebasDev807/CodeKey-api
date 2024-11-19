@@ -53,6 +53,9 @@ export class LessonService {
         .where('lesson.unitId =:unit', {
           unit
         })
+        .leftJoinAndSelect('lesson.challenges', 'challenges')
+        .leftJoinAndSelect('challenges.challengeOptions', 'options')
+        .orderBy('options.charOrder', 'ASC')
         .limit(limit)
         .offset(offset)
         .getMany();
@@ -66,13 +69,12 @@ export class LessonService {
     }
   }
 
-  
 
   async deleteAllLessons() {
     const queryBuilder = this.lessonRepository.createQueryBuilder();
-      queryBuilder.delete()
-        .where({})
-        .execute();
+    queryBuilder.delete()
+      .where({})
+      .execute();
   }
 
   findOne(id: number) {

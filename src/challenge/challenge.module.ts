@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Challenge } from './entities/challenge.entity';
 import { ChallengeOptions } from './entities/challenge-option.entity';
 import { ChallengeProgress } from './entities/challenge-progress.entity';
+import { AuthModule } from 'src/auth/auth.module';
+import { LessonModule } from 'src/lesson/lesson.module';
 
 @Module({
   controllers: [ChallengeController],
@@ -14,7 +16,9 @@ import { ChallengeProgress } from './entities/challenge-progress.entity';
       Challenge,
       ChallengeOptions,
       ChallengeProgress
-    ])
+    ]),
+    LessonModule,
+    AuthModule
   ]
 })
 export class ChallengeModule { }

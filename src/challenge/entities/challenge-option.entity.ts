@@ -4,20 +4,14 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'option_challenge' })
 export class ChallengeOptions {
 
-    @PrimaryGeneratedColumn()
-    public id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: number;
 
     @Column('text', { name: 'text', nullable: false })
-    public text: string;
+    text: string;
 
     @Column('boolean', { name: 'correct', nullable: false })
-    public correct: boolean;
-
-    @Column('text', { name: 'image_src' })
-    public imageSrc: string;
-
-    @Column('text', { name: 'audio_src' })
-    public audio_src: string;
+    correct: boolean;
 
     // relation
     @ManyToOne(
@@ -26,5 +20,8 @@ export class ChallengeOptions {
         { onDelete: 'CASCADE' }
     )
     // @JoinColumn({ name: 'challenge_id' })
-    public challenge: Challenge;
+    challenge: Challenge;
+
+    @Column('text', { name: 'char-order', nullable: false })
+    charOrder: string;
 }

@@ -1,5 +1,4 @@
-import { Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Challenge } from './challenge.entity';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from 'src/auth/entities/user.entity';
 
 @Entity({ name: 'challenge_progress' })
@@ -14,4 +13,5 @@ export class ChallengeProgress {
         { onDelete: 'CASCADE' }
     )
     user: User;
+
 }

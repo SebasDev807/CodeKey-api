@@ -1,20 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException } from '@nestjs/common';
 import { ChallengeService } from './challenge.service';
-import { CreateChallengeDto } from './dto/create-challenge.dto';
-import { UpdateChallengeDto } from './dto/update-challenge.dto';
+import { CreateChallengeDto } from './dto/challenge/create-challenge.dto';
+import { UpdateChallengeDto } from './dto/challenge/update-challenge.dto';
+import { Auth } from 'src/auth/decorators/role-protected/auth.decorator';
+import { ValidRoles } from 'src/auth/interfaces/valid-roles.enum';
+import { CreateChallengeOptionDto } from './dto/challenge-options/create-challenge-option.dto';
 
 @Controller('challenge')
 export class ChallengeController {
-  constructor(private readonly challengeService: ChallengeService) {}
+  constructor(private readonly challengeService: ChallengeService) { }
 
+  //http://local/api/v1/challenge - POST
   @Post()
-  create(@Body() createChallengeDto: CreateChallengeDto) {
-    return this.challengeService.create(createChallengeDto);
+  @Auth(ValidRoles.ADMIN)
+  createChallenge(@Body() createChallengeDto: CreateChallengeDto) {
+    return this.challengeService.createChallenge(createChallengeDto);
+  }
+
+  @Post('option')
+  @Auth(ValidRoles.ADMIN)
+  createOption(@Body() createChallengeoption:CreateChallengeOptionDto){
+    return this.challengeService.createChallengeOption(createChallengeoption);
   }
 
   @Get()
-  findAll() {
-    return this.challengeService.findAll();
+  findAll(@Query('lessonId') lessonId: string) {
+    return this.challengeService.findAll(+lessonId);
   }
 
   @Get(':id')
@@ -22,13 +33,8 @@ export class ChallengeController {
     return this.challengeService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChallengeDto: UpdateChallengeDto) {
-    return this.challengeService.update(+id, updateChallengeDto);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.challengeService.remove(+id);
-  }
+
+
+  
 }
