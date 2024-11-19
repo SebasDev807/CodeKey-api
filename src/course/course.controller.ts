@@ -34,6 +34,7 @@ export class CourseController {
   @ApiParam({ name: 'term', description: 'search term' })
   @ApiResponse({ status: 404, description: 'Course with your term not found' })
   @Get(':term')
+  @Auth(ValidRoles.USER)
   findOne(@Param('term') term: string) {
     return this.courseService.findOne(term);
   }

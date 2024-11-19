@@ -14,7 +14,8 @@ import { LessonModule } from 'src/lesson/lesson.module';
     AuthModule,
     CourseModule,
     UnitModule,
-    LessonModule
+    LessonModule,
+    AuthModule
   ]
 
 })

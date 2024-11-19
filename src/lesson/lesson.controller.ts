@@ -27,6 +27,7 @@ export class LessonController {
   }
 
   @Get('getMany/:unit')
+  @Auth(ValidRoles.USER)
   findAll(
     @Param('unit') unit: number,
     @Query() paginationDto: PaginationDto
@@ -35,6 +36,7 @@ export class LessonController {
   }
 
   @Get(':id')
+  @Auth(ValidRoles.USER)
   findOne(@Param('id') id: number) {
     return this.lessonService.findOne(+id);
   }

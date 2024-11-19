@@ -19,6 +19,7 @@ import { LessonModule } from 'src/lesson/lesson.module';
     ]),
     LessonModule,
     AuthModule
-  ]
+  ],
+  exports: [TypeOrmModule]
 })
 export class ChallengeModule { }

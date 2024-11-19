@@ -29,6 +29,7 @@ export class ChallengeController {
   }
 
   @Get(':id')
+  @Auth(ValidRoles.USER)
   findOne(@Param('id') id: string) {
     return this.challengeService.findOne(+id);
   }
