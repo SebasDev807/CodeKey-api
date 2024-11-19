@@ -64,7 +64,7 @@ export class AuthService {
       name: createUserDto.name,
       email: createUserDto.email,
       password: createUserDto.password,
-      activeCourse: Promise.resolve(course),
+      activeCourseId: course.id, // Establecemos el ID del curso directamente
     });
 
     user.token = this.generateToken();
@@ -84,6 +84,60 @@ export class AuthService {
     const { password, ...result } = user;
     return result;
   }
+
+  // async create(createUserDto: CreateUserDto) {
+  //   const { email, activeCourse: courseId } = createUserDto;
+
+  //   // Verificar usuario existente
+  //   const existingUser = await this.userRepository.findOne({
+  //     where: { email },
+  //     select: { confirmed: true, id: true },
+  //   });
+
+  //   if (existingUser) {
+  //     if (existingUser.confirmed) {
+  //       throw new BadRequestException('This account already exists');
+  //     }
+
+  //     if (!existingUser.confirmed) {
+  //       await this.userRepository.delete({ id: existingUser.id });
+  //     }
+  //   }
+
+  //   // Buscar el curso activo
+  //   const course = await this.courseRepository.findOne({
+  //     where: { id: courseId },
+  //   });
+
+  //   if (!course) {
+  //     throw new BadRequestException(`Course with ID ${courseId} not found`);
+  //   }
+
+  //   // Crear el usuario con la relación al curso
+  //   const user = this.userRepository.create({
+  //     name: createUserDto.name,
+  //     email: createUserDto.email,
+  //     password: createUserDto.password,
+  //     activeCourse: Promise.resolve(course),
+  //   });
+
+  //   user.token = this.generateToken();
+  //   const { name, token } = user;
+
+  //   await this.userRepository.save(user);
+
+  //   this.mailService.sendEmail(
+  //     email,
+  //     name,
+  //     token,
+  //     'Verificación de cuenta',
+  //     'Verifica tu cuenta',
+  //   );
+
+  //   // No devolver la contraseña
+  //   const { password, ...result } = user;
+  //   return result;
+  // }
 
   // async create(createUserDto: CreateUserDto) {
   //   const { email } = createUserDto;
