@@ -84,7 +84,7 @@ export class CheckAnswerService {
 
             // Para cualquier otro tipo de error, devolver un mensaje genérico
             this.logger.error(`Error al ejecutar el código: ${stderr || error.message}`);
-            return reject(new BadRequestException('Error al ejecutar el código.'));
+            return reject(new BadRequestException(`${stderr}`));
           }
 
 

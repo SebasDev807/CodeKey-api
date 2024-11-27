@@ -95,9 +95,14 @@ export class ChallengeService {
   async deleteAllChallenges() {
     const queryBuilderChallenge = this.challengeRepository.createQueryBuilder();
     const queryBuilderChallengeOpt = this.challengeOptionsRepository.createQueryBuilder();
+    const queryBuilderChallengeCode = this.challengeCodeRepository.createQueryBuilder();
 
 
     await queryBuilderChallenge.delete()
+      .where({})
+      .execute();
+
+    await queryBuilderChallengeOpt.delete()
       .where({})
       .execute();
 

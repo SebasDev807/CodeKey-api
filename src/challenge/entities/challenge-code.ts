@@ -11,6 +11,14 @@ export class ChallengeCode {
     code: string;
 
     @Column('text', { nullable: false })
+    title: string;
+
+
+    @Column('text', { nullable: false })
+    description: string;
+
+
+    @Column('text', { nullable: false })
     expectedOutput: string;
 
     @ManyToOne(

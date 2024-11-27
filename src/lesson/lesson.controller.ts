@@ -32,12 +32,14 @@ export class LessonController {
     @Param('unit') unit: number,
     @Query() paginationDto: PaginationDto
   ) {
+    console.log('Peticion');
     return this.lessonService.findAll(+unit);
   }
 
   @Get(':id')
   @Auth(ValidRoles.USER)
   findOne(@Param('id') id: number) {
+    
     return this.lessonService.findOne(+id);
   }
 

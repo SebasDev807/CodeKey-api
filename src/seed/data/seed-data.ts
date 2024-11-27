@@ -1,5 +1,6 @@
 import { Course } from "src/course/entities/course.entity";
 import { ChallengeOptions } from '../../challenge/entities/challenge-option.entity';
+import { ChallengeCode } from "src/challenge/entities/challenge-code";
 
 
 type ValidRoles = 'ADMIN' | 'USER' | 'GUEST';
@@ -19,6 +20,15 @@ interface SeedCourse {
   title: string,
   description: string;
   imageSrc: string;
+}
+
+interface seedChallengeCode {
+  id: number;
+  code: string;
+  expectedOutput: string;
+  lesson: number;
+  title: string;
+  description: string;
 }
 
 interface SeedUnit {
@@ -44,7 +54,8 @@ interface SeedData {
   units: SeedUnit[];
   lessons: SeedLesson[];
   challenges: SeedChallenges[];
-  challengeOptions: SeedChallengeOptions[]
+  challengeOptions: SeedChallengeOptions[];
+  challengeCodes: seedChallengeCode[];
 }
 
 interface SeedChallenges {
@@ -647,8 +658,177 @@ export const seedData: SeedData = {
       charOrder: 'd',
       correct: false,
     },
-  ]
+  ],
+  challengeCodes: [
 
+    {
+      id: 3,
+      code: "let name = ''; let age = ; console.log(name, age);",
+      expectedOutput: "Juan 30",
+      title: "Variables básicas",
+      description: "Crea dos variables, una para el nombre y otra para la edad, y muestra ambos valores en la consola.",
+      lesson: 2
+    },
+    {
+      id: 4,
+      code: "let isStudent = ; console.log(isStudent);",
+      expectedOutput: "true",
+      title: "Booleano",
+      description: "Crea una variable booleana que indique si eres estudiante o no, y muestra el valor en la consola.",
+      lesson: 2
+    },
+    {
+      id: 5,
+      code: "let price = ; let tax = ; let total = ; console.log();",
+      expectedOutput: "24.1789",
+      title: "Cálculos con números decimales",
+      description: "Crea una variable para un precio y otra para el impuesto. Calcula el precio total incluyendo el impuesto y muéstralo en la consola.",
+      lesson: 2
+    },
+    {
+      id: 6,
+      code: "let fruits = ['manzana','pera','banana','mora']; console.log(fruits);",
+      expectedOutput: "banana",
+      title: "Arreglo de strings",
+      description: "Crea un arreglo con tres frutas y muestra el segundo elemento en la consola.",
+      lesson: 2
+    },
+    {
+      id: 7,
+      code: "let user = {name:'Carlos'}; console.log();",
+      expectedOutput: "Carlos",
+      title: "Objeto",
+      description: "Crea un objeto con las propiedades 'name' y 'age', y muestra el valor de la propiedad 'name'.",
+      lesson: 2
+    },
+    {
+      id: 8,
+      code: "let a = 15; let b = 4; let result = ; console.log(result);",
+      expectedOutput: "19",
+      title: "Suma de dos números",
+      description: "Usa el operador de suma (+) para sumar dos números y muestra el resultado en la consola.",
+      lesson: 3
+    },
+
+    //Operadores
+    {
+      id: 9,
+      code: "let a = 20; let b = 5; let result = ; console.log(result);",
+      expectedOutput: "15",
+      title: "Resta de dos números",
+      description: "Usa el operador de resta (-) para restar dos números y muestra el resultado en la consola.",
+      lesson: 3
+    },
+
+    {
+      id: 10,
+      code: "let a = 6; let b = 3; let result = ; console.log(result);",
+      expectedOutput: "18",
+      title: "Multiplicación de dos números",
+      description: "Usa el operador de multiplicación (*) para multiplicar dos números y muestra el resultado en la consola.",
+      lesson: 3
+    },
+    {
+      id: 11,
+      code: "let a = 20; let b = 4; let result = ; console.log(result);",
+      expectedOutput: "5",
+      title: "División de dos números",
+      description: "Usa el operador de división (/) para dividir dos números y muestra el resultado en la consola.",
+      lesson: 3
+    },
+    {
+      id: 12,
+      code: "let a = 10; let b = 3; let result = ; console.log(result);",
+      expectedOutput: "1",
+      title: "Módulo de dos números",
+      description: "Usa el operador de módulo (%) para obtener el residuo de la división de dos números y muestra el resultado en la consola.",
+      lesson: 3
+    },
+
+    //Sentencias de control
+    {
+      id: 6,
+      code: "let temperature = 25; let message = ''; if () { message = 'Hace calor'; } else { message = 'Hace frío'; } console.log(message);",
+      expectedOutput: "Hace frío",
+      title: "Condicional IF - Temperatura",
+      description: "Usa una sentencia `if` para verificar si la temperatura es mayor o igual a 30 y asigna el mensaje 'Hace calor'. Si no, asigna 'Hace frío'. Muestra el mensaje en la consola.",
+      lesson: 6
+    },
+    {
+      id: 7,
+      code: "let age = 18; let access = ''; if () { access = 'Acceso permitido'; } else { access = 'Acceso denegado'; } console.log(access);",
+      expectedOutput: "Acceso permitido",
+      title: "Condicional IF - Edad",
+      description: "Usa una sentencia `if` para verificar si la edad es mayor o igual a 18 y asigna 'Acceso permitido'. Si no, asigna 'Acceso denegado'. Muestra el mensaje en la consola.",
+      lesson: 6
+    },
+    {
+      id: 8,
+      code: "let number = 7; let result = ''; if () { result = 'Número positivo'; } else { result = 'Número negativo'; } console.log(result);",
+      expectedOutput: "Número positivo",
+      title: "Condicional IF - Número",
+      description: "Usa una sentencia `if` para verificar si el número es mayor que cero y asigna 'Número positivo'. Si no, asigna 'Número negativo'. Muestra el resultado en la consola.",
+      lesson: 6
+    },
+    {
+      id: 9,
+      code: "let score = 85; let grade = ''; if () { grade = 'A'; } else if () { grade = 'B'; } else { grade = 'C'; } console.log(grade);",
+      expectedOutput: "B",
+      title: "Condicional IF - Calificación",
+      description: "Usa sentencias `if` y `else if` para asignar una calificación basada en la puntuación. Asigna 'A' si la puntuación es 90 o más, 'B' si es mayor o igual a 80, y 'C' en los demás casos. Muestra la calificación en la consola.",
+      lesson: 6
+    },
+    {
+      id: 10,
+      code: "let num1 = 10; let num2 = 20; let message = ''; if () { message = 'Num1 es mayor que Num2'; } else { message = 'Num1 no es mayor que Num2'; } console.log(message);",
+      expectedOutput: "Num1 no es mayor que Num2",
+      title: "Condicional IF - Comparación de números",
+      description: "Usa una sentencia `if` para comparar dos números y asigna un mensaje dependiendo de si el primer número es mayor que el segundo. Muestra el mensaje en la consola.",
+      lesson: 6
+    },
+
+
+    {
+      id: 11,
+      code: "let sum = 0; for (let i = 1; i <= 5; i++) { sum += i; } console.log(sum);",
+      expectedOutput: "15",
+      title: "Bucle FOR - Suma de los primeros 5 números",
+      description: "Usa un bucle `for` para sumar los primeros 5 números (1 + 2 + 3 + 4 + 5) y muestra el resultado en la consola.",
+      lesson: 8
+    },
+    {
+      id: 12,
+      code: "let evenNumbers = ''; for (let i = 2; i <= 20; i += 2) { evenNumbers += i + ' '; } console.log(evenNumbers);",
+      expectedOutput: "2 4 6 8 10 12 14 16 18 20 ",
+      title: "Bucle FOR - Números pares",
+      description: "Usa un bucle `for` para concatenar los números pares entre 2 y 20 en una variable `evenNumbers` y luego muestra el resultado.",
+      lesson: 8
+    },
+    {
+      id: 13,
+      code: "let factorial = 1; for (let i = 1; i <= 5; i++) { factorial *= i; } console.log(factorial);",
+      expectedOutput: "120",
+      title: "Bucle FOR - Cálculo del factorial",
+      description: "Usa un bucle `for` para calcular el factorial de 5 (5 * 4 * 3 * 2 * 1) y muestra el resultado en la consola.",
+      lesson: 8
+    },
+    {
+      id: 14,
+      code: "let reversed = ''; for (let i = 5; i >= 1; i--) { reversed += i + ' '; } console.log(reversed);",
+      expectedOutput: "5 4 3 2 1 ",
+      title: "Bucle FOR - Contando hacia atrás",
+      description: "Usa un bucle `for` para contar hacia atrás desde 5 hasta 1 y concatenar los números en una variable `reversed`. Muestra el resultado en la consola.",
+      lesson: 8
+    },
+    {
+      id: 15,
+      code: "let squares = ''; for (let i = 1; i <= 10; i++) { squares += (i * i) + ' '; } console.log(squares);",
+      expectedOutput: "1 4 9 16 25 36 49 64 81 100 ",
+      title: "Bucle FOR - Cuadrados de los primeros 10 números",
+      description: "Usa un bucle `for` para calcular y concatenar los cuadrados de los primeros 10 números (1^2, 2^2, 3^2...) en una variable `squares`. Luego muestra el resultado en la consola.",
+      lesson: 8
+    }
+  ]
 };
 
 

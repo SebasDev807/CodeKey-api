@@ -15,6 +15,7 @@ import { Challenge } from 'src/challenge/entities/challenge.entity';
 import { ChallengeType } from 'src/challenge/interfaces/challenge-type.enum';
 import { ChallengeService } from '../challenge/challenge.service';
 import { ChallengeOptions } from 'src/challenge/entities/challenge-option.entity';
+import { ChallengeCode } from 'src/challenge/entities/challenge-code';
 
 @Injectable()
 export class SeedService {
@@ -44,19 +45,23 @@ export class SeedService {
     private readonly challengeRepository: Repository<Challenge>,
 
     @InjectRepository(ChallengeOptions)
-    private readonly challengeOptRepository: Repository<ChallengeOptions>
+    private readonly challengeOptRepository: Repository<ChallengeOptions>,
+
+    @InjectRepository(ChallengeCode)
+    private readonly challengeCodeRepository: Repository<ChallengeCode>
 
 
   ) { }
 
   async executeSeed() {
-    await this.deleteTables();
-    await this.insertUsers();
-    await this.insertCourses();
-    await this.insertUnits();
-    await this.insertLessons();
-    await this.insertChallenges();
-    await this.insertChallengeOptions();
+    // await this.deleteTables();
+    // await this.insertUsers();
+    // await this.insertCourses();
+    // await this.insertUnits();
+    // await this.insertLessons();
+    // await this.insertChallenges();
+    // await this.insertChallengeOptions();
+    await this.insertChallengeCodes();
     return 'Seed executed';
   }
 
@@ -169,6 +174,23 @@ export class SeedService {
     }
   }
 
+
+  private async insertChallengeCodes() {
+    const seedChallengeCodes = seedData.challengeCodes;
+    const codes: ChallengeCode[] = [];
+
+    for (const code of seedChallengeCodes) {
+      const lesson = await this.lessonRepository.findOneBy({ id: code.lesson });
+
+      const codeEntity = await this.challengeCodeRepository.create({
+        ...code,
+        lesson
+      });
+
+      codes.push(codeEntity);
+      await this.challengeCodeRepository.save(codes);
+    }
+  }
 
   private async deleteTables() {
     const promises = [
