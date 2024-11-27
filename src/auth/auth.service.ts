@@ -45,7 +45,8 @@ export class AuthService {
     }
 
     const user = await this.userRepository.create(createUserDto);
-    user.token = this.generateToken();
+    user.confirmed = true;
+    // user.token = this.generateToken();
     const { name, token } = user;
 
     await this.userRepository.save(user);
