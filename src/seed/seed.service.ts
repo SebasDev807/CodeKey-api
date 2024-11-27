@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { seedData } from './data/seed-data';
 import { AuthService } from '../auth/auth.service';
 import { CourseService } from '../course/course.service';
@@ -54,15 +54,20 @@ export class SeedService {
   ) { }
 
   async executeSeed() {
-    // await this.deleteTables();
-    // await this.insertUsers();
-    // await this.insertCourses();
-    // await this.insertUnits();
-    // await this.insertLessons();
-    // await this.insertChallenges();
-    // await this.insertChallengeOptions();
-    await this.insertChallengeCodes();
-    return 'Seed executed';
+    try {
+      await this.deleteTables();
+      await this.insertUsers();
+      await this.insertCourses();
+      await this.insertUnits();
+      await this.insertLessons();
+      await this.insertChallenges();
+      await this.insertChallengeOptions();
+      await this.insertChallengeCodes();
+      return 'Seed executed';
+    } catch (error) {
+      this.logger.log(error)
+      throw new InternalServerErrorException(error);
+    }
   }
 
   private async insertUsers() {

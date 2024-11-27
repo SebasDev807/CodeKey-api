@@ -799,7 +799,7 @@ export const seedData: SeedData = {
     {
       id: 12,
       code: "let evenNumbers = ''; for (let i = 2; i <= 20; i += 2) { evenNumbers += i + ' '; } console.log(evenNumbers);",
-      expectedOutput: "2 4 6 8 10 12 14 16 18 20 ",
+      expectedOutput: "2468101214161820 ",
       title: "Bucle FOR - Números pares",
       description: "Usa un bucle `for` para concatenar los números pares entre 2 y 20 en una variable `evenNumbers` y luego muestra el resultado.",
       lesson: 8
@@ -815,7 +815,7 @@ export const seedData: SeedData = {
     {
       id: 14,
       code: "let reversed = ''; for (let i = 5; i >= 1; i--) { reversed += i + ' '; } console.log(reversed);",
-      expectedOutput: "5 4 3 2 1 ",
+      expectedOutput: "54321",
       title: "Bucle FOR - Contando hacia atrás",
       description: "Usa un bucle `for` para contar hacia atrás desde 5 hasta 1 y concatenar los números en una variable `reversed`. Muestra el resultado en la consola.",
       lesson: 8
@@ -823,7 +823,7 @@ export const seedData: SeedData = {
     {
       id: 15,
       code: "let squares = ''; for (let i = 1; i <= 10; i++) { squares += (i * i) + ' '; } console.log(squares);",
-      expectedOutput: "1 4 9 16 25 36 49 64 81 100 ",
+      expectedOutput: "149162536496481100",
       title: "Bucle FOR - Cuadrados de los primeros 10 números",
       description: "Usa un bucle `for` para calcular y concatenar los cuadrados de los primeros 10 números (1^2, 2^2, 3^2...) en una variable `squares`. Luego muestra el resultado en la consola.",
       lesson: 8
