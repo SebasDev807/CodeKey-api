@@ -51,7 +51,7 @@ export class AuthService {
 
     await this.userRepository.save(user);
 
-    this.mailService.sendEmail(email, name, token, 'Verificación de cuenta', 'Verifica tu cuenta');
+    // this.mailService.sendEmail(email, name, token, 'Verificación de cuenta', 'Verifica tu cuenta');
 
     delete user.password;
 
