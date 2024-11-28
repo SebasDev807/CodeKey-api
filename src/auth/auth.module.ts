@@ -16,10 +16,6 @@ import { Course } from 'src/course/entities/course.entity';
   imports: [
     MailerModule,
     TypeOrmModule.forFeature([User, Course]),
-    // TypeOrmModule.forFeature([
-    //   User
-    // ]),
-
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({

@@ -47,7 +47,11 @@ export class User {
     description: 'Reference witch one course is doing the user',
     uniqueItems: true,
   })
-  @ManyToOne(() => Course)
+  @ManyToOne(
+    () => Course,
+    course => course.users,
+    {onDelete: 'CASCADE'}
+  )
   @JoinColumn({ name: 'active_course_id' })
   activeCourse: Course;
 
