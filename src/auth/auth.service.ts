@@ -67,18 +67,21 @@ export class AuthService {
       activeCourseId: course.id, // Establecemos el ID del curso directamente
     });
 
+    user.confirmed = true;
+    
     user.token = this.generateToken();
     const { name, token } = user;
 
     await this.userRepository.save(user);
 
-    this.mailService.sendEmail(
-      email,
-      name,
-      token,
-      'Verificación de cuenta',
-      'Verifica tu cuenta',
-    );
+
+    // this.mailService.sendEmail(
+    //   email,
+    //   name,
+    //   token,
+    //   'Verificación de cuenta',
+    //   'Verifica tu cuenta',
+    // );
 
     // No devolver la contraseña
     const { password, ...result } = user;
