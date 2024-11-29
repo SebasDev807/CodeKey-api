@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { SeedModule } from './seed/seed.module';
 import { CheckAnswerModule } from './check-answer/check-answer.module';
+import { UploadsModule } from './uploads/uploads.module';
 
 
 @Module({
@@ -34,6 +35,7 @@ import { CheckAnswerModule } from './check-answer/check-answer.module';
     ChallengeModule,
     SeedModule,
     CheckAnswerModule,
+    UploadsModule,
     // OptionChallengeModule,
   ],
 

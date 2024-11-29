@@ -9,8 +9,7 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-
-
+import { UpdateUserDto } from './dto/update-user.dto';
 
 
 @Injectable()
@@ -57,7 +56,6 @@ export class AuthService {
 
     return user;
 
-
   }
 
 
@@ -66,7 +64,7 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, confirmed: true, id:true }
+      select: { email: true, password: true, confirmed: true, id: true }
     });
 
     if (!user) {
@@ -83,20 +81,11 @@ export class AuthService {
 
     delete user.password;
 
-    
+
     return {
       ...user,
       token: this.getJwtToken({ id: user.id })
     };
-  }
-
-  //!Ojo con esto.
-  async deleteAllUsers(){
-    const queryBuilder = this.userRepository.createQueryBuilder()
-    queryBuilder
-      .delete()
-      .where({})
-      .execute();
   }
 
 
@@ -116,7 +105,41 @@ export class AuthService {
 
   }
 
+  async updateUser(id: string, updateUserDto: UpdateUserDto) {
 
+    const user = await this.userRepository.preload({
+      id,
+      ...updateUserDto,
+    });
+
+    if (!user) {
+      throw new NotFoundException(`Usuario no encontrado.`)
+    }
+
+    try {
+      await this.userRepository.save(user);
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Error al actualizar el usuario');
+    }
+  }
+
+  async getUser(user: User) {
+   
+    try {
+      const queryBuilder = this.userRepository.createQueryBuilder('user');
+
+      const userDb = await queryBuilder
+        .leftJoinAndSelect('user.profilePhotoUrl', 'profile_photo')
+        .getOne();
+
+      return userDb;
+
+    } catch (error) {
+
+    }
+
+  }
 
 
   private getJwtToken(payload: JwtPayload) {
@@ -135,5 +158,13 @@ export class AuthService {
     throw new InternalServerErrorException('Verifica los logs del servidor');
   }
 
+  //!Ojo con esto.
+  async deleteAllUsers() {
+    const queryBuilder = this.userRepository.createQueryBuilder()
+    queryBuilder
+      .delete()
+      .where({})
+      .execute();
+  }
 
 }

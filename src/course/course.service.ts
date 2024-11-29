@@ -90,6 +90,7 @@ export class CourseService {
   }
 
   async update(id: number, updateCourseDto: UpdateCourseDto) {
+    
     const course = await this.courseRepository.preload({
       id,
       ...updateCourseDto

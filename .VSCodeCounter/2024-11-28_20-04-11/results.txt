@@ -1,0 +1,162 @@
+Date : 2024-11-28 20:04:11
+Directory : c:\Users\Juan Sebastián\Desktop\CodeKey\api
+Total : 84 files,  15511 codes, 61 comments, 755 blanks, all 16327 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          8 |     12,600 |          0 |          7 |     12,607 |
+| TypeScript         |         72 |      2,791 |         61 |        716 |      3,568 |
+| Markdown           |          1 |         56 |          0 |         27 |         83 |
+| JavaScript         |          1 |         25 |          0 |          1 |         26 |
+| JSON with Comments |          1 |         21 |          0 |          1 |         22 |
+| YAML               |          1 |         18 |          0 |          3 |         21 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         84 |     15,511 |         61 |        755 |     16,327 |
+| . (Files)                                                                                                      |         11 |     12,711 |          0 |         38 |     12,749 |
+| scripts                                                                                                        |          1 |         18 |          8 |          3 |         29 |
+| src                                                                                                            |         70 |      2,753 |         53 |        708 |      3,514 |
+| src (Files)                                                                                                    |          2 |         73 |          3 |         18 |         94 |
+| src\auth                                                                                                       |         15 |        397 |          7 |        125 |        529 |
+| src\auth (Files)                                                                                               |          3 |        185 |          6 |         53 |        244 |
+| src\auth\decorators                                                                                            |          3 |         28 |          0 |         12 |         40 |
+| src\auth\decorators\role-protected                                                                             |          3 |         28 |          0 |         12 |         40 |
+| src\auth\dto                                                                                                   |          3 |         57 |          0 |         20 |         77 |
+| src\auth\entities                                                                                              |          1 |         53 |          1 |         17 |         71 |
+| src\auth\guards                                                                                                |          2 |         34 |          0 |         12 |         46 |
+| src\auth\guards\user-role                                                                                      |          2 |         34 |          0 |         12 |         46 |
+| src\auth\interfaces                                                                                            |          2 |          8 |          0 |          0 |          8 |
+| src\auth\strategies                                                                                            |          1 |         32 |          0 |         11 |         43 |
+| src\challenge                                                                                                  |         13 |        290 |          8 |        119 |        417 |
+| src\challenge (Files)                                                                                          |          5 |        169 |          1 |         63 |        233 |
+| src\challenge\dto                                                                                              |          3 |         32 |          0 |         19 |         51 |
+| src\challenge\dto\challenge                                                                                    |          2 |         18 |          0 |         11 |         29 |
+| src\challenge\dto\challenge-options                                                                            |          1 |         14 |          0 |          8 |         22 |
+| src\challenge\entities                                                                                         |          4 |         85 |          7 |         36 |        128 |
+| src\challenge\interfaces                                                                                       |          1 |          4 |          0 |          1 |          5 |
+| src\check-answer                                                                                               |          4 |        132 |          3 |         42 |        177 |
+| src\check-answer (Files)                                                                                       |          3 |        126 |          3 |         38 |        167 |
+| src\check-answer\dto                                                                                           |          1 |          6 |          0 |          4 |         10 |
+| src\common                                                                                                     |          4 |         60 |          0 |          8 |         68 |
+| src\common\decorators                                                                                          |          3 |         40 |          0 |          4 |         44 |
+| src\common\dtos                                                                                                |          1 |         20 |          0 |          4 |         24 |
+| src\course                                                                                                     |          6 |        233 |          3 |         75 |        311 |
+| src\course (Files)                                                                                             |          3 |        173 |          3 |         50 |        226 |
+| src\course\dto                                                                                                 |          2 |         26 |          0 |         11 |         37 |
+| src\course\entities                                                                                            |          1 |         34 |          0 |         14 |         48 |
+| src\lesson                                                                                                     |          6 |        196 |          4 |         67 |        267 |
+| src\lesson (Files)                                                                                             |          3 |        133 |          0 |         39 |        172 |
+| src\lesson\dto                                                                                                 |          2 |         20 |          0 |          9 |         29 |
+| src\lesson\entities                                                                                            |          1 |         43 |          4 |         19 |         66 |
+| src\mailer                                                                                                     |          2 |         56 |          0 |         10 |         66 |
+| src\seed                                                                                                       |          4 |        966 |         18 |        107 |      1,091 |
+| src\seed (Files)                                                                                               |          3 |        183 |          1 |         70 |        254 |
+| src\seed\data                                                                                                  |          1 |        783 |         17 |         37 |        837 |
+| src\unit                                                                                                       |          7 |        205 |          0 |         85 |        290 |
+| src\unit (Files)                                                                                               |          4 |        159 |          0 |         66 |        225 |
+| src\unit\dto                                                                                                   |          2 |         20 |          0 |          9 |         29 |
+| src\unit\entities                                                                                              |          1 |         26 |          0 |         10 |         36 |
+| src\uploads                                                                                                    |          7 |        145 |          7 |         52 |        204 |
+| src\uploads (Files)                                                                                            |          3 |        112 |          7 |         33 |        152 |
+| src\uploads\dto                                                                                                |          2 |          4 |          0 |          3 |          7 |
+| src\uploads\entities                                                                                           |          1 |         20 |          0 |          8 |         28 |
+| src\uploads\helpers                                                                                            |          1 |          9 |          0 |          8 |         17 |
+| test                                                                                                           |          2 |         29 |          0 |          6 |         35 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                       | language           | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\.eslintrc.js                                                       | JavaScript         |         25 |          0 |          1 |         26 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\.prettierrc                                                        | JSON               |          4 |          0 |          0 |          4 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\README.md                                                          | Markdown           |         56 |          0 |         27 |         83 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\databse.json                                                       | JSON               |          0 |          0 |          1 |          1 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\docker-compose.yaml                                                | YAML               |         18 |          0 |          3 |         21 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\nest-cli.json                                                      | JSON               |          8 |          0 |          1 |          9 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\ormconfig.json                                                     | JSON               |         10 |          0 |          1 |         11 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\package-lock.json                                                  | JSON               |     12,475 |          0 |          1 |     12,476 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\package.json                                                       | JSON               |         90 |          0 |          1 |         91 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\scripts\generateUML.ts                                             | TypeScript         |         18 |          8 |          3 |         29 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\app.module.ts                                                  | TypeScript         |         39 |          2 |          5 |         46 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\auth.controller.ts                                        | TypeScript         |         39 |          0 |         10 |         49 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\auth.module.ts                                            | TypeScript         |         42 |          0 |          5 |         47 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\auth.service.ts                                           | TypeScript         |        104 |          6 |         38 |        148 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\decorators\role-protected\auth.decorator.ts               | TypeScript         |         11 |          0 |          2 |         13 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\decorators\role-protected\get-user.decorator.ts           | TypeScript         |         11 |          0 |          4 |         15 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\decorators\role-protected\role-protected.decorator.ts     | TypeScript         |          6 |          0 |          6 |         12 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\dto\create-user.dto.ts                                    | TypeScript         |         38 |          0 |         11 |         49 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\dto\login-user.dto.ts                                     | TypeScript         |         16 |          0 |          6 |         22 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\dto\update-user.dto.ts                                    | TypeScript         |          3 |          0 |          3 |          6 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\entities\user.entity.ts                                   | TypeScript         |         53 |          1 |         17 |         71 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\guards\user-role\user-role.guard.spec.ts                  | TypeScript         |          6 |          0 |          2 |          8 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\guards\user-role\user-role.guard.ts                       | TypeScript         |         28 |          0 |         10 |         38 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\interfaces\jwt-payload.interface.ts                       | TypeScript         |          3 |          0 |          0 |          3 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\interfaces\valid-roles.enum.ts                            | TypeScript         |          5 |          0 |          0 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\auth\strategies\jwt-strategy.ts                                | TypeScript         |         32 |          0 |         11 |         43 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\challenge.controller.spec.ts                         | TypeScript         |         16 |          0 |          5 |         21 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\challenge.controller.ts                              | TypeScript         |         30 |          1 |         11 |         42 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\challenge.module.ts                                  | TypeScript         |         29 |          0 |          3 |         32 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\challenge.service.spec.ts                            | TypeScript         |         14 |          0 |          5 |         19 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\challenge.service.ts                                 | TypeScript         |         80 |          0 |         39 |        119 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\dto\challenge-options\create-challenge-option.dto.ts | TypeScript         |         14 |          0 |          8 |         22 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\dto\challenge\create-challenge.dto.ts                | TypeScript         |         15 |          0 |          9 |         24 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\dto\challenge\update-challenge.dto.ts                | TypeScript         |          3 |          0 |          2 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\entities\challenge-code.ts                           | TypeScript         |         22 |          0 |         10 |         32 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\entities\challenge-option.entity.ts                  | TypeScript         |         19 |          2 |          7 |         28 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\entities\challenge-progress.entity.ts                | TypeScript         |         13 |          0 |          5 |         18 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\entities\challenge.entity.ts                         | TypeScript         |         31 |          5 |         14 |         50 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\challenge\interfaces\challenge-type.enum.ts                    | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\check-answer\check-answer.controller.ts                        | TypeScript         |         26 |          0 |          5 |         31 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\check-answer\check-answer.module.ts                            | TypeScript         |         14 |          0 |          2 |         16 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\check-answer\check-answer.service.ts                           | TypeScript         |         86 |          3 |         31 |        120 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\check-answer\dto\check-answer.dto.ts                           | TypeScript         |          6 |          0 |          4 |         10 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\common\decorators\index.ts                                     | TypeScript         |          2 |          0 |          0 |          2 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\common\decorators\match.decorator.ts                           | TypeScript         |         19 |          0 |          2 |         21 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\common\decorators\unimayorEmail.decorator.ts                   | TypeScript         |         19 |          0 |          2 |         21 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\common\dtos\pagination.dto.ts                                  | TypeScript         |         20 |          0 |          4 |         24 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\course\course.controller.ts                                    | TypeScript         |         56 |          0 |          9 |         65 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\course\course.module.ts                                        | TypeScript         |         21 |          0 |          2 |         23 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\course\course.service.ts                                       | TypeScript         |         96 |          3 |         39 |        138 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\course\dto\create-course.dto.ts                                | TypeScript         |         23 |          0 |          9 |         32 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\course\dto\update-course.dto.ts                                | TypeScript         |          3 |          0 |          2 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\course\entities\course.entity.ts                               | TypeScript         |         34 |          0 |         14 |         48 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\lesson\dto\create-lesson.dto.ts                                | TypeScript         |         17 |          0 |          7 |         24 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\lesson\dto\update-lesson.dto.ts                                | TypeScript         |          3 |          0 |          2 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\lesson\entities\lesson.entity.ts                               | TypeScript         |         43 |          4 |         19 |         66 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\lesson\lesson.controller.ts                                    | TypeScript         |         50 |          0 |          8 |         58 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\lesson\lesson.module.ts                                        | TypeScript         |         23 |          0 |          2 |         25 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\lesson\lesson.service.ts                                       | TypeScript         |         60 |          0 |         29 |         89 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\mailer\mailer.module.ts                                        | TypeScript         |          9 |          0 |          2 |         11 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\mailer\mailer.service.ts                                       | TypeScript         |         47 |          0 |          8 |         55 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\main.ts                                                        | TypeScript         |         34 |          1 |         13 |         48 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\seed\data\seed-data.ts                                         | TypeScript         |        783 |         17 |         37 |        837 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\seed\seed.controller.ts                                        | TypeScript         |         12 |          1 |          4 |         17 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\seed\seed.module.ts                                            | TypeScript         |         21 |          0 |          4 |         25 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\seed\seed.service.ts                                           | TypeScript         |        150 |          0 |         62 |        212 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\dto\create-unit.dto.ts                                    | TypeScript         |         17 |          0 |          7 |         24 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\dto\update-unit.dto.ts                                    | TypeScript         |          3 |          0 |          2 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\entities\unit.entity.ts                                   | TypeScript         |         26 |          0 |         10 |         36 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\unit.controller.ts                                        | TypeScript         |         36 |          0 |          9 |         45 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\unit.module.ts                                            | TypeScript         |         20 |          0 |          2 |         22 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\unit.service.spec.ts                                      | TypeScript         |         14 |          0 |          5 |         19 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\unit\unit.service.ts                                           | TypeScript         |         89 |          0 |         50 |        139 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\dto\create-upload.dto.ts                               | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\dto\update-upload.dto.ts                               | TypeScript         |          3 |          0 |          2 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\entities\profile-photo.entity.ts                       | TypeScript         |         20 |          0 |          8 |         28 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\helpers\fileNamer.ts                                   | TypeScript         |          9 |          0 |          8 |         17 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\uploads.controller.ts                                  | TypeScript         |         31 |          1 |          5 |         37 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\uploads.module.ts                                      | TypeScript         |         17 |          0 |          2 |         19 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\src\uploads\uploads.service.ts                                     | TypeScript         |         64 |          6 |         26 |         96 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\test\app.e2e-spec.ts                                               | TypeScript         |         20 |          0 |          5 |         25 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\test\jest-e2e.json                                                 | JSON               |          9 |          0 |          1 |         10 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\tsconfig.build.json                                                | JSON               |          4 |          0 |          1 |          5 |
+| c:\Users\Juan Sebastián\Desktop\CodeKey\api\tsconfig.json                                                      | JSON with Comments |         21 |          0 |          1 |         22 |
+| Total                                                                                                          |                    |     15,511 |         61 |        755 |     16,327 |
++----------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
